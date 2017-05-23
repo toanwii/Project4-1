@@ -2,6 +2,7 @@
 CS 143 Huffman coding
 Instructions and requirements for the project
 http://faculty.edcc.edu//paul.bladek/CS143/p4.htm
+Select branch to see which feature is being worked on.
 
 # How to use Github
 ## Introduction
