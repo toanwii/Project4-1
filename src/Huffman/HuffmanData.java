@@ -63,15 +63,17 @@ public class HuffmanData<T extends Comparable<? super T>>
      * @return -1 if <, 0 if ==, 1 if >
      */
 
+    @Override
     public int compareTo(HuffmanData<T> o)
     {
-        return (occurances < o.occurances)? -1
-                : (occurances == o.occurances)? 0 : 1;
+        return (occurances < o.occurances)? occurances - o.occurances
+                : (occurances == o.occurances)? 0 : o.occurances - occurances ;
     }
     
     /*
      * @return strng version of class
      */
+    @Override
     public String toString()
     {
         String dataString = "*";
