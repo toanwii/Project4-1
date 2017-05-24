@@ -27,6 +27,7 @@ public class Project4 {
     public static void main(String[] args) {
         // TODO code application logic here
         int[] c = new int[MAX_NUMBER_CHARS];
+        
         String fileName = "Through_The_Looking_Glass.txt";
         ArrayList<String> story = new ArrayList();
 
@@ -52,20 +53,21 @@ public class Project4 {
             System.out.print((char) i);
         }
 
-        nodes = new HuffmanData[index];
+        nodes = new HuffmanChar[index];
         index = 0;
         for (int i = 0; i < MAX_NUMBER_CHARS; i++) {
             if (count[i] > 0) {
-                nodes[index++] = new HuffmanData<>((char) i, count[i]);
+                nodes[index++] = new HuffmanChar((char) i, count[i]);
                 System.out.println(nodes[index - 1]);
             }
         }
-        
         //Sort the array, not completed.
-        Arrays.sort(nodes,null);
+        Arrays.sort(nodes, Collections.reverseOrder());
         System.out.println("====");
-        for (int i = 0; i < nodes.length; i++)
+        for (int i = 0; i < nodes.length; i++) {
             System.out.println(nodes[i]);
+        }
+
     }
 
 }

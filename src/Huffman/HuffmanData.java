@@ -3,83 +3,83 @@
  *
  * Created on May 21, 2007, 2:17 PM
  */
-
 package huffman;
+
 import java.lang.*;
+import java.util.Comparator;
 
 /**
  * @author pbladek
+ * @param <T>
  */
 public class HuffmanData<T extends Comparable<? super T>>
-        implements Comparable<HuffmanData<T>>
-{
+        implements Comparable<HuffmanData<T>> {
+
     private T data;
     private int occurances = 0;
-    
+
     /**
      * Creates a new instance of HuffmanData
      */
-    public HuffmanData(){}
-    
-    /** Creates a new instance of HuffmanData
+    public HuffmanData() {
+    }
+
+    /**
+     * Creates a new instance of HuffmanData
+     *
      * @param dataIn the data part
      */
-    public HuffmanData(T dataIn)
-    {
+    public HuffmanData(T dataIn) {
         data = dataIn;
     }
-  
-    /** Creates a new instance of HuffmanData
+
+    /**
+     * Creates a new instance of HuffmanData
+     *
      * @param dataIn the data part
      * @param count the number of occurances
      */
-    public HuffmanData(T dataIn, int count)
-    {
+    public HuffmanData(T dataIn, int count) {
         this(dataIn);
-        occurances = count;   
+        occurances = count;
     }
-    
+
     /*
      * accessor
      * @return data
      */
-    public T getData()
-    {
+    public T getData() {
         return data;
     }
-    
+
     /*
      * accessor
      * @return occurances
      */
-    public int getOccurances()
-    {
+    public int getOccurances() {
         return occurances;
     }
-    
+
     /**
      *
      * @param o the other HuffmanData
      * @return -1 if <, 0 if ==, 1 if >
      */
-
     @Override
-    public int compareTo(HuffmanData<T> o)
-    {
-        return (occurances < o.occurances)? occurances - o.occurances
-                : (occurances == o.occurances)? 0 : o.occurances - occurances ;
+    public int compareTo(HuffmanData<T> o) {
+        return Integer.compare(occurances, o.occurances);
     }
-    
+
     /*
      * @return strng version of class
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         String dataString = "*";
-        if(data != null)
-            dataString = data.toString(); 
+        if (data != null) {
+            dataString = data.toString();
+        }
         return dataString + ": " + occurances + " ";
     }
-    
+
 }
