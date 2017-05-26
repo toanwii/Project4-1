@@ -62,7 +62,7 @@ public class Project4 {
             }
         }
         //Sort the array, not completed.
-        Arrays.sort(nodes, Collections.reverseOrder());
+        Arrays.sort(nodes);
         System.out.println("====");
         for (int i = 0; i < nodes.length; i++) {
             System.out.println(nodes[i]);
