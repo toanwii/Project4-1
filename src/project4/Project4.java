@@ -19,7 +19,7 @@ public class Project4 {
     static final int MAX_NUMBER_CHARS = 128;
 
     private static int[] count = new int[128];
-    private static HuffmanData[] nodes;
+    private static HuffmanChar[] nodes;
 
     /**
      * @param args the command line arguments
@@ -27,7 +27,7 @@ public class Project4 {
     public static void main(String[] args) {
         // TODO code application logic here
         int[] c = new int[MAX_NUMBER_CHARS];
-        
+
         String fileName = "Through_The_Looking_Glass.txt";
         ArrayList<String> story = new ArrayList();
 
@@ -67,7 +67,7 @@ public class Project4 {
         for (int i = 0; i < nodes.length; i++) {
             System.out.println(nodes[i]);
         }
-
+        
     }
 
 }
