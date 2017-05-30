@@ -3,15 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/boyti/Desktop/CS%20JAVA%203/Project4/src/huffman/HuffmanData.java</file>
-            <file>file:/C:/Users/boyti/Desktop/CS%20JAVA%203/Project4/src/huffman/SaveData.java</file>
-            <file>file:/C:/Users/boyti/Desktop/CS%20JAVA%203/Project4/src/huffman/BinaryTree.java</file>
-            <file>file:/C:/Users/boyti/Desktop/CS%20JAVA%203/Project4/src/huffman/BinaryNode.java</file>
-            <file>file:/C:/Users/boyti/Desktop/CS%20JAVA%203/Project4/src/huffman/HuffmanChar.java</file>
-            <file>file:/C:/Users/boyti/Desktop/CS%20JAVA%203/Project4/src/huffman/BinaryNodeInterface.java</file>
-            <file>file:/C:/Users/boyti/Desktop/CS%20JAVA%203/Project4/src/huffman/HuffmanTree.java</file>
-            <file>file:/C:/Users/boyti/Desktop/CS%20JAVA%203/Project4/src/project4/Project4.java</file>
-            <file>file:/C:/Users/boyti/Desktop/CS%20JAVA%203/Project4/src/huffman/Huffman.java</file>
+            <file>file:/C:/Users/boyti/Documents/GitHub/Project4/src/Huffman/BinaryTree.java</file>
+            <file>file:/C:/Users/boyti/Documents/GitHub/Project4/src/Huffman/Huffman.java</file>
+            <file>file:/C:/Users/boyti/Documents/GitHub/Project4/src/project4/Project4.java</file>
+            <file>file:/C:/Users/boyti/Documents/GitHub/Project4/src/Huffman/HuffmanChar.java</file>
+            <file>file:/C:/Users/boyti/Documents/GitHub/Project4/src/Huffman/HuffmanTree.java</file>
+            <file>file:/C:/Users/boyti/Documents/GitHub/Project4/src/Huffman/HuffmanData.java</file>
         </group>
     </open-files>
 </project-private>
