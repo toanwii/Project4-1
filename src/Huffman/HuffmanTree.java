@@ -35,17 +35,18 @@ public class HuffmanTree<T extends Comparable<? super T>>
      */
     public HuffmanTree(HuffmanData<T>[] dataArray) {
         // your code here
-        while (leafCount < dataArray.length - 1) {
-            firstAdd(dataArray[leafCount], dataArray[++leafCount]);
-            dataArray[leafCount] = super.getRootData();
+        HuffmanData<T>[] clone = dataArray.clone();
+        while (leafCount < clone.length - 1) {
+            firstAdd(clone[leafCount], clone[++leafCount]);
+            clone[leafCount] = super.getRootData();
             //Tracking log. Can be deleted
             System.out.println(super.getRootNode().getLeftChild().getData().getData() + ":" + super.getRootNode().getLeftChild().getData().getOccurances());
             System.out.println(super.getRootNode().getRightChild().getData().getData() + ":" + super.getRootNode().getRightChild().getData().getOccurances());
-            //End of Tracking log.
             System.out.println("====");
-            Arrays.sort(dataArray, leafCount, dataArray.length);
+            //End of Tracking log.F
+            Arrays.sort(clone, leafCount, clone.length);
         }
-
+        clone = null;
         keyMap = new TreeMap<String, T>();
         codeMap = new TreeMap<T, String>();
         setMaps(getRootNode(), "");
