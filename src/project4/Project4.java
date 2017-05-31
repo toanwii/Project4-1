@@ -19,7 +19,7 @@ public class Project4 {
     static final int MAX_NUMBER_CHARS = 128;
 
     private static int[] count = new int[128];
-    private static HuffmanChar[] nodes;
+    private static HuffmanData[] nodes;
 
     /**
      * @param args the command line arguments
@@ -28,7 +28,7 @@ public class Project4 {
         // TODO code application logic here
         int[] c = new int[MAX_NUMBER_CHARS];
 
-        String fileName = "Through_The_Looking_Glass.txt";
+        String fileName = "abc.txt";
         ArrayList<String> story = new ArrayList();
 
         if (TextFileIO.hasFile(fileName)) {
@@ -53,7 +53,7 @@ public class Project4 {
             System.out.print((char) i);
         }
 
-        nodes = new HuffmanChar[index];
+        nodes = new HuffmanData[index];
         index = 0;
         for (int i = 0; i < MAX_NUMBER_CHARS; i++) {
             if (count[i] > 0) {
@@ -67,7 +67,9 @@ public class Project4 {
         for (int i = 0; i < nodes.length; i++) {
             System.out.println(nodes[i]);
         }
-        
+        System.out.println("===");
+        HuffmanTree a = new HuffmanTree(nodes);
+        System.out.println(a);
     }
 
 }
