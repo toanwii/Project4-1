@@ -33,9 +33,6 @@ public class HuffmanTree<T extends Comparable<? super T>>
      * @param dataArray n array of Huffman Data
      */
     public HuffmanTree(HuffmanData<T>[] dataArray) {
-        // your code here
-//        add(new BinaryNode<HuffmanData<T>>(dataArray[leafCount]),
-//                new BinaryNode<HuffmanData<T>>(dataArray[++leafCount]) );
         BinaryNode<HuffmanData<T>>[] nodes;
         BinaryNode<HuffmanData<T>> tmp;
         nodes = new BinaryNode[dataArray.length];
@@ -43,7 +40,6 @@ public class HuffmanTree<T extends Comparable<? super T>>
             nodes[i] = new BinaryNode<>(dataArray[i], null, null);
         }
         while (leafCount < nodes.length - 1) {
-//            firstAdd(dataArray[leafCount], dataArray[++leafCount]);
             add(nodes[leafCount], nodes[++leafCount]);
             nodes[leafCount] = (BinaryNode<HuffmanData<T>>) super.getRootNode();
             for (int i = leafCount + 1; i < nodes.length - 1; i++) {
@@ -91,65 +87,6 @@ public class HuffmanTree<T extends Comparable<? super T>>
         /* This code is kept */
         setTree(new HuffmanData<T>(MARKER, left.getData().getOccurances() + right.getData().getOccurances()), leftTree, rightTree);
         //        setTree(new HuffmanData<T>((T) (left.getData().getData().toString() + right.getData().getData().toString()), left.getData().getOccurances() + right.getData().getOccurances()), leftTree, rightTree);
-    }
-
-    /**
-     * adds 2 new elements to this tree<br>
-     * smaller on the left
-     *
-     * @param element1
-     * @param element2
-     */
-    private void firstAdd(BinaryNode<HuffmanData<T>> node1,
-            BinaryNode<HuffmanData<T>> node2) {
-//        if (getRootNode() == null) {
-//            add(node1, node2);
-//            return;
-//        }
-//
-        BinaryNode<HuffmanData<T>> internalNode;
-        if (node1.getData().getOccurances() < node2.getData().getOccurances()) {
-            internalNode = new BinaryNode<>(
-                    new HuffmanData<>(MARKER, node1.getData().getOccurances() + node2.getData().getOccurances()),
-                    node1,
-                    node2);
-        } else {
-            internalNode = new BinaryNode<>(
-                    new HuffmanData<>(MARKER, node1.getData().getOccurances() + node2.getData().getOccurances()),
-                    node2,
-                    node1);
-        }
-        if (internalNode.getData().getOccurances() < getRootNode().getData().getOccurances()) {
-            add(internalNode, (BinaryNode<HuffmanData<T>>) super.getRootNode());
-        } else {
-            add((BinaryNode<HuffmanData<T>>) super.getRootNode(), internalNode);
-        }
-//        if (node1.getData().getOccurances() <= node2.getData().getOccurances()) {
-//            add(node1, node2);
-//        } else {
-//            add(node2, node1);
-//        }
-    }
-
-    /**
-     * add a single element to the tree smaller on the left NEED REDOING.
-     *
-     * @param element1
-     */
-    private void add(HuffmanData<T> element1) {
-        BinaryNode<HuffmanData<T>> node = new BinaryNode<>(element1);
-        HuffmanTree<T> leftTree = new HuffmanTree<T>();
-        leftTree.setRootNode(node);
-        if (getRootNode() == null) {
-            setTree(new HuffmanData<T>(MARKER, node.getData().getOccurances()), leftTree, null);
-            return;
-        }
-
-        if (getRootNode().getLeftChild() == null) {
-            add(node, (BinaryNode<HuffmanData<T>>) getRootNode().getRightChild());
-        } else {
-            add((BinaryNode<HuffmanData<T>>) getRootNode().getLeftChild(), node);
-        }
     }
 
     /**
