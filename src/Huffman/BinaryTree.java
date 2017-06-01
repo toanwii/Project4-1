@@ -13,7 +13,7 @@ import java.util.*;
 public class BinaryTree<T> implements BinaryTreeInterface<T> ,
     java.io.Serializable
 {
-    private BinaryNodeInterface<T> root;
+    BinaryNodeInterface<T> root;
     
     /**
      * default constructor
@@ -131,6 +131,7 @@ public class BinaryTree<T> implements BinaryTreeInterface<T> ,
  
 
 
+    @Override
     public T getRootData ()
     {
         T rootData = null;
@@ -140,12 +141,14 @@ public class BinaryTree<T> implements BinaryTreeInterface<T> ,
     } // end getRootData
 
 
+    @Override
     public boolean isEmpty ()
     {
         return root == null;
     } // end isEmpty
 
 
+    @Override
     public void clear ()
     {
         root = null;
@@ -176,6 +179,7 @@ public class BinaryTree<T> implements BinaryTreeInterface<T> ,
         Stack< BinaryNodeInterface<T>> nodeStack =
                 new Stack<BinaryNodeInterface<T>>();
         BinaryNodeInterface < T > currentNode = root;
+        String path = "";
         while (!nodeStack.isEmpty () || (currentNode != null))
         {
             // find leftmost node with no left child
@@ -183,6 +187,7 @@ public class BinaryTree<T> implements BinaryTreeInterface<T> ,
             {
                 nodeStack.push (currentNode);
                 currentNode = currentNode.getLeftChild ();
+                path += "0";
             } // end while
             // visit leftmost node, then traverse its right subtree
             if (!nodeStack.isEmpty ())
@@ -190,7 +195,7 @@ public class BinaryTree<T> implements BinaryTreeInterface<T> ,
                 BinaryNodeInterface < T > nextNode = nodeStack.pop ();
                 assert nextNode != null; // since nodeStack was not empty
                 // before the pop
-                System.out.println (nextNode.getData ());
+                System.out.println (nextNode.getData () + ":" + path);
                 currentNode = nextNode.getRightChild ();
             } // end if
         } // end while
