@@ -28,13 +28,19 @@ public class Project4 {
         // TODO code application logic here
         int[] c = new int[MAX_NUMBER_CHARS];
 
+<<<<<<< HEAD
         String fileName = "abc.txt";
+=======
+        String fileName = "Through_The_Looking_Glass.txt";
+>>>>>>> commit-encode
         ArrayList<String> story = new ArrayList();
 
         if (TextFileIO.hasFile(fileName)) {
             TextFileIO.readFile(fileName);
             story = TextFileIO.getTextFile();
         }
+        else
+            return;
         for (String line : story) {
             for (int i = 0; i < line.length(); i++) {
                 int k = line.charAt(i);
