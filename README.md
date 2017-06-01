@@ -2,7 +2,8 @@
 CS 143 Huffman coding
 Instructions and requirements for the project
 http://faculty.edcc.edu//paul.bladek/CS143/p4.htm
-Select branch to see which feature is being worked on.
+# Attention
+I just have successfully constructed the HuffmanTree, and the nodes seems like in the right order. Please test it.
 
 # How to use Github
 ## Introduction
