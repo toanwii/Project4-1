@@ -42,7 +42,7 @@ public class HuffmanTree<T extends Comparable<? super T>>
         while (leafCount < nodes.length - 1) {
             add(nodes[leafCount], nodes[++leafCount]);
             nodes[leafCount] = (BinaryNode<HuffmanData<T>>) super.getRootNode();
-            for (int i = leafCount + 1; i < nodes.length - 1; i++) {
+            for (int i = leafCount + 1; i < nodes.length; i++) {
                 if (getRootData().getOccurances() <= nodes[i].getData().getOccurances()) {
                     nodes[i - 1] = (BinaryNode<HuffmanData<T>>) getRootNode();
                     break;
