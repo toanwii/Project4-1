@@ -38,19 +38,23 @@ public class HuffmanTree<T extends Comparable<? super T>>
 //        add(new BinaryNode<HuffmanData<T>>(dataArray[leafCount]),
 //                new BinaryNode<HuffmanData<T>>(dataArray[++leafCount]) );
         BinaryNode<HuffmanData<T>>[] nodes;
+        BinaryNode<HuffmanData<T>> tmp;
         nodes = new BinaryNode[dataArray.length];
         for (int i = 0; i < dataArray.length; i++) {
-            nodes[i] = new BinaryNode<>(dataArray[i]);
+            nodes[i] = new BinaryNode<>(dataArray[i], null, null);
         }
         while (leafCount < nodes.length - 1) {
-            firstAdd(dataArray[leafCount], dataArray[++leafCount]);
-            //nodes[leafCount] = (BinaryNode<HuffmanData<T>>) super.getRootNode();
-            for (int i = leafCount; i < nodes.length - 1; i++) {
-                if (getRootData().getOccurances() >= nodes[i].getData().getOccurances()) {
-                    nodes[i] = (BinaryNode<HuffmanData<T>>) getRootNode();
+//            firstAdd(dataArray[leafCount], dataArray[++leafCount]);
+            add(nodes[leafCount], nodes[++leafCount]);
+            nodes[leafCount] = (BinaryNode<HuffmanData<T>>) super.getRootNode();
+            for (int i = leafCount + 1; i < nodes.length - 1; i++) {
+                if (getRootData().getOccurances() <= nodes[i].getData().getOccurances()) {
+                    nodes[i - 1] = (BinaryNode<HuffmanData<T>>) getRootNode();
                     break;
                 } else {
-                    nodes[i] = nodes[i + 1];
+                    tmp = nodes[i - 1];
+                    nodes[i - 1] = nodes[i];
+                    nodes[i] = tmp;
                 }
             }
             //Tracking log. Can be deleted
@@ -59,7 +63,8 @@ public class HuffmanTree<T extends Comparable<? super T>>
             //End of Tracking log.
             System.out.println("====");
         }
-
+        System.out.println("Traverse");
+        inorderTraverse();
         keyMap = new TreeMap<String, T>();
         codeMap = new TreeMap<T, String>();
         setMaps(getRootNode(), "");
