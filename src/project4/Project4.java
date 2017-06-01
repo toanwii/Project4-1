@@ -28,7 +28,7 @@ public class Project4 {
         // TODO code application logic here
         int[] c = new int[MAX_NUMBER_CHARS];
 
-        String fileName = "Through_The_Looking_Glass.txt";
+        String fileName = "abc.txt";
         ArrayList<String> story = new ArrayList();
 
         if (TextFileIO.hasFile(fileName)) {
