@@ -34,19 +34,7 @@ public class HuffmanTree<T extends Comparable<? super T>>
      */
     public HuffmanTree(HuffmanData<T>[] dataArray) {
         // your code here
-<<<<<<< HEAD
-        while (leafCount < dataArray.length - 1) {
-            firstAdd(dataArray[leafCount], dataArray[++leafCount]);
-            dataArray[leafCount] = super.getRootData();
-            //Tracking log. Can be deleted
-            System.out.println(super.getRootNode().getLeftChild().getData().getData() + ":" + super.getRootNode().getLeftChild().getData().getOccurances());
-            System.out.println(super.getRootNode().getRightChild().getData().getData() + ":" + super.getRootNode().getRightChild().getData().getOccurances());
-            //End of Tracking log.
-            System.out.println("====");
-            Arrays.sort(dataArray, leafCount, dataArray.length);
-        }
 
-=======
 //        add(new BinaryNode<HuffmanData<T>>(dataArray[leafCount]),
 //                new BinaryNode<HuffmanData<T>>(dataArray[++leafCount]) );
         BinaryNode<HuffmanData<T>>[] nodes;
@@ -76,11 +64,7 @@ public class HuffmanTree<T extends Comparable<? super T>>
             System.out.println("====");
         }
         System.out.println("Traverse");
-<<<<<<< HEAD
         inorderTraverse();
->>>>>>> commit-encode
-=======
->>>>>>> commit-encode
         keyMap = new TreeMap<String, T>();
         codeMap = new TreeMap<T, String>();
         setMaps(getRootNode(), "");
@@ -98,15 +82,6 @@ public class HuffmanTree<T extends Comparable<? super T>>
             BinaryNode<HuffmanData<T>> right) {
         HuffmanTree<T> leftTree = new HuffmanTree<T>();
         HuffmanTree<T> rightTree = new HuffmanTree<T>();
-<<<<<<< HEAD
-        rightTree.setRootNode(right);
-<<<<<<< HEAD
-        /* This code is kept
-        setTree(new HuffmanData<T>(MARKER, left.getData().getOccurances() + right.getData().getOccurances()), leftTree, rightTree);
-         */
-        setTree(new HuffmanData<T>((T) (left.getData().getData().toString() + right.getData().getData().toString()), left.getData().getOccurances() + right.getData().getOccurances()), leftTree, rightTree);
-=======
-=======
 
         if (left.getData().getOccurances() <= right.getData().getOccurances()) {
             leftTree.setRootNode(left);
@@ -115,11 +90,9 @@ public class HuffmanTree<T extends Comparable<? super T>>
             leftTree.setRootNode(right);
             rightTree.setRootNode(left);
         }
->>>>>>> commit-encode
         /* This code is kept */
         setTree(new HuffmanData<T>(MARKER, left.getData().getOccurances() + right.getData().getOccurances()), leftTree, rightTree);
         //        setTree(new HuffmanData<T>((T) (left.getData().getData().toString() + right.getData().getData().toString()), left.getData().getOccurances() + right.getData().getOccurances()), leftTree, rightTree);
->>>>>>> commit-encode
     }
 
     /**
@@ -129,23 +102,6 @@ public class HuffmanTree<T extends Comparable<? super T>>
      * @param element1
      * @param element2
      */
-<<<<<<< HEAD
-    private void firstAdd(HuffmanData<T> element1, HuffmanData<T> element2) {
-        BinaryNode<HuffmanData<T>> node1 = new BinaryNode<>(element1);
-        BinaryNode<HuffmanData<T>> node2 = new BinaryNode<>(element2);
-
-<<<<<<< HEAD
-        if (node1.getData().getOccurances() < node2.getData().getOccurances()) {
-            add(node1, node2);
-        } else {
-            add(node2, node1);
-=======
-        if (getRootNode() == null) {
-            add(node1, node2);
-            return;
-        }
-
-=======
     private void firstAdd(BinaryNode<HuffmanData<T>> node1,
             BinaryNode<HuffmanData<T>> node2) {
 //        if (getRootNode() == null) {
@@ -153,7 +109,6 @@ public class HuffmanTree<T extends Comparable<? super T>>
 //            return;
 //        }
 //
->>>>>>> commit-encode
         BinaryNode<HuffmanData<T>> internalNode;
         if (node1.getData().getOccurances() < node2.getData().getOccurances()) {
             internalNode = new BinaryNode<>(
@@ -170,7 +125,6 @@ public class HuffmanTree<T extends Comparable<? super T>>
             add(internalNode, (BinaryNode<HuffmanData<T>>) super.getRootNode());
         } else {
             add((BinaryNode<HuffmanData<T>>) super.getRootNode(), internalNode);
->>>>>>> commit-encode
         }
 //        if (node1.getData().getOccurances() <= node2.getData().getOccurances()) {
 //            add(node1, node2);
@@ -180,13 +134,10 @@ public class HuffmanTree<T extends Comparable<? super T>>
     }
 
     /**
-<<<<<<< HEAD
      * add a single element to the tree smaller on the left
      * NEED REDOING.
-=======
      * add a single element to the tree smaller on the left NEED REDOING.
      *
->>>>>>> commit-encode
      * @param element1
      */
     private void add(HuffmanData<T> element1) {
@@ -194,11 +145,8 @@ public class HuffmanTree<T extends Comparable<? super T>>
         HuffmanTree<T> leftTree = new HuffmanTree<T>();
         leftTree.setRootNode(node);
         if (getRootNode() == null) {
-<<<<<<< HEAD
-            setTree(new HuffmanData<T>(MARKER, node.getData().getOccurances()), leftTree , null);
-=======
+
             setTree(new HuffmanData<T>(MARKER, node.getData().getOccurances()), leftTree, null);
->>>>>>> commit-encode
             return;
         }
 
