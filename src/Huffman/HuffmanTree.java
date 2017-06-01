@@ -97,8 +97,6 @@ public class HuffmanTree<T extends Comparable<? super T>>
      */
     private void setMaps(BinaryNodeInterface<HuffmanData<T>> node,
             String codeString) {
-        Stack<BinaryNodeInterface<T>> nodeStack
-                = new Stack<BinaryNodeInterface<T>>();
         BinaryNodeInterface<HuffmanData<T>> currentNode = node;
         String path = codeString;
         if (currentNode.getLeftChild() == null && currentNode.getRightChild() == null) {
@@ -113,35 +111,6 @@ public class HuffmanTree<T extends Comparable<? super T>>
                 setMaps(currentNode.getRightChild(), path.concat("1"));
             }
         }
-
-//        if (currentNode.hasRightChild()){
-//            setMaps(currentNode,"1");
-//            System.out.println(currentNode.getData().toString()+ ":"+path);
-//        }
-//        while (!nodeStack.isEmpty() || (currentNode != null)) {
-//            // find leftmost node with no left child
-//            while (currentNode != null) {
-//                nodeStack.push((BinaryNodeInterface<T>) currentNode);
-//                if (currentNode.getLeftChild() != null) {
-//                    path += "0";
-//                }
-//                currentNode = currentNode.getLeftChild();
-//            } // end while
-//            // visit leftmost node, then traverse its right subtree
-//            if (!nodeStack.isEmpty()) {
-//                BinaryNodeInterface< T> nextNode = nodeStack.pop();
-//                assert nextNode != null; // since nodeStack was not empty
-//                // before the pop
-//                System.out.println(nextNode.getData() + ":" + path);
-//                if (nextNode.getRightChild() != null) {
-//                    path += "1";
-//                } else if (!nodeStack.isEmpty()) {
-//                    path = path.substring(0, nodeStack.size() - 1);
-//                }
-//                currentNode = (BinaryNodeInterface<HuffmanData<T>>) nextNode.getRightChild();
-//
-//            } // end if
-//        } // end while
     }
 
     /*
@@ -159,5 +128,4 @@ public class HuffmanTree<T extends Comparable<? super T>>
     public SortedMap<String, T> getKeyMap() {
         return keyMap;
     }
-
 }
