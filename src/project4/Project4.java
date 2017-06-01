@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import huffman.*;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.SortedMap;
 
 /**
  *
@@ -28,7 +29,7 @@ public class Project4 {
         // TODO code application logic here
         int[] c = new int[MAX_NUMBER_CHARS];
 
-        String fileName = "abc.txt";
+        String fileName = "Through_The_Looking_Glass.txt";
         ArrayList<String> story = new ArrayList();
 
         if (TextFileIO.hasFile(fileName)) {
@@ -71,6 +72,19 @@ public class Project4 {
         }
         System.out.println("===");
         HuffmanTree a = new HuffmanTree(nodes);
+        
+        String tmp;
+        ArrayList<String> encodeLine = new ArrayList<>();
+        SortedMap<Character,String> map = a.getCodeMap();
+        for (String line : story){
+            tmp = "";
+            for (int i = 0; i<line.length();i++){
+                tmp += map.get(line.charAt(i));
+            }
+            System.out.println(line);
+            System.out.println(tmp);
+       }
+        
         System.out.println(a);
     }
 
