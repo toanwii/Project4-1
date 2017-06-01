@@ -1,4 +1,1 @@
-a
-b
-ccc
-dddddd
+abcabd

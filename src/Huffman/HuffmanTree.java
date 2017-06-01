@@ -18,7 +18,6 @@ public class HuffmanTree<T extends Comparable<? super T>>
     private final T MARKER = null;
     SortedMap<T, String> codeMap;
     SortedMap<String, T> keyMap;
-
     private int leafCount = 0;
 
     /**
@@ -64,10 +63,11 @@ public class HuffmanTree<T extends Comparable<? super T>>
             System.out.println("====");
         }
         System.out.println("Traverse");
-        inorderTraverse();
         keyMap = new TreeMap<String, T>();
         codeMap = new TreeMap<T, String>();
         setMaps(getRootNode(), "");
+        System.out.println(keyMap.toString());
+        System.out.println(codeMap.toString());
     }
 
     /**
@@ -79,9 +79,15 @@ public class HuffmanTree<T extends Comparable<? super T>>
     private void add(BinaryNode<HuffmanData<T>> left,
             BinaryNode<HuffmanData<T>> right) {
         HuffmanTree<T> leftTree = new HuffmanTree<T>();
-        leftTree.setRootNode(left);
         HuffmanTree<T> rightTree = new HuffmanTree<T>();
-        rightTree.setRootNode(right);
+
+        if (left.getData().getOccurances() <= right.getData().getOccurances()) {
+            leftTree.setRootNode(left);
+            rightTree.setRootNode(right);
+        } else {
+            leftTree.setRootNode(right);
+            rightTree.setRootNode(left);
+        }
         /* This code is kept */
         setTree(new HuffmanData<T>(MARKER, left.getData().getOccurances() + right.getData().getOccurances()), leftTree, rightTree);
         //        setTree(new HuffmanData<T>((T) (left.getData().getData().toString() + right.getData().getData().toString()), left.getData().getOccurances() + right.getData().getOccurances()), leftTree, rightTree);
@@ -94,15 +100,13 @@ public class HuffmanTree<T extends Comparable<? super T>>
      * @param element1
      * @param element2
      */
-    private void firstAdd(HuffmanData<T> element1, HuffmanData<T> element2) {
-        BinaryNode<HuffmanData<T>> node1 = new BinaryNode<>(element1);
-        BinaryNode<HuffmanData<T>> node2 = new BinaryNode<>(element2);
-
-        if (getRootNode() == null) {
-            add(node1, node2);
-            return;
-        }
-
+    private void firstAdd(BinaryNode<HuffmanData<T>> node1,
+            BinaryNode<HuffmanData<T>> node2) {
+//        if (getRootNode() == null) {
+//            add(node1, node2);
+//            return;
+//        }
+//
         BinaryNode<HuffmanData<T>> internalNode;
         if (node1.getData().getOccurances() < node2.getData().getOccurances()) {
             internalNode = new BinaryNode<>(
@@ -120,6 +124,11 @@ public class HuffmanTree<T extends Comparable<? super T>>
         } else {
             add((BinaryNode<HuffmanData<T>>) super.getRootNode(), internalNode);
         }
+//        if (node1.getData().getOccurances() <= node2.getData().getOccurances()) {
+//            add(node1, node2);
+//        } else {
+//            add(node2, node1);
+//        }
     }
 
     /**
@@ -151,7 +160,51 @@ public class HuffmanTree<T extends Comparable<? super T>>
      */
     private void setMaps(BinaryNodeInterface<HuffmanData<T>> node,
             String codeString) {
+        Stack<BinaryNodeInterface<T>> nodeStack
+                = new Stack<BinaryNodeInterface<T>>();
+        BinaryNodeInterface<HuffmanData<T>> currentNode = node;
+        String path = codeString;
+        if (currentNode.getLeftChild() == null && currentNode.getRightChild() == null) {
+            System.out.println(currentNode.getData().toString() + ":" + path);
+            keyMap.put(path, currentNode.getData().getData());
+            codeMap.put(currentNode.getData().getData(), path);
+        } else {
+            if (currentNode.getLeftChild() != null) {
+                setMaps(currentNode.getLeftChild(), path.concat("0"));
+            }
+            if(currentNode.getRightChild() != null) {
+                setMaps(currentNode.getRightChild(), path.concat("1"));
+            }
+        }
 
+//        if (currentNode.hasRightChild()){
+//            setMaps(currentNode,"1");
+//            System.out.println(currentNode.getData().toString()+ ":"+path);
+//        }
+//        while (!nodeStack.isEmpty() || (currentNode != null)) {
+//            // find leftmost node with no left child
+//            while (currentNode != null) {
+//                nodeStack.push((BinaryNodeInterface<T>) currentNode);
+//                if (currentNode.getLeftChild() != null) {
+//                    path += "0";
+//                }
+//                currentNode = currentNode.getLeftChild();
+//            } // end while
+//            // visit leftmost node, then traverse its right subtree
+//            if (!nodeStack.isEmpty()) {
+//                BinaryNodeInterface< T> nextNode = nodeStack.pop();
+//                assert nextNode != null; // since nodeStack was not empty
+//                // before the pop
+//                System.out.println(nextNode.getData() + ":" + path);
+//                if (nextNode.getRightChild() != null) {
+//                    path += "1";
+//                } else if (!nodeStack.isEmpty()) {
+//                    path = path.substring(0, nodeStack.size() - 1);
+//                }
+//                currentNode = (BinaryNodeInterface<HuffmanData<T>>) nextNode.getRightChild();
+//
+//            } // end if
+//        } // end while
     }
 
     /*
