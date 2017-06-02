@@ -27,7 +27,6 @@ public class Huffman {
     private HuffmanTree<Character> theTree;
     private SortedMap<Character, String> keyMap;
     private SortedMap<String, Character> codeMap;
-    HuffmanChar[] charCountArray;
 
     /**
      * @param args the command line arguments
@@ -98,7 +97,6 @@ public class Huffman {
                 count[i] = c[i];
                 index++;
             }
-            System.out.print((char) i);
         }
 
         nodes = new HuffmanData[index];
@@ -106,16 +104,11 @@ public class Huffman {
         for (int i = 0; i < CHARMAX; i++) {
             if (count[i] > 0) {
                 nodes[index++] = new HuffmanChar((char) i, count[i]);
-                System.out.println(nodes[index - 1]);
             }
         }
         //Sort the array, not completed.
         Arrays.sort(nodes);
-        System.out.println("====");
-        for (int i = 0; i < nodes.length; i++) {
-            System.out.println(nodes[i]);
-        }
-        System.out.println("===");
+
         theTree = new HuffmanTree(nodes);
         codeMap = theTree.getCodeMap();
         keyMap = theTree.getKeyMap();

@@ -53,19 +53,11 @@ public class HuffmanTree<T extends Comparable<? super T>>
                     nodes[i] = tmp;
                 }
             }
-            //Tracking log. Can be deleted
-            System.out.println(super.getRootNode().getLeftChild().getData().toString());
-            System.out.println(super.getRootNode().getRightChild().getData().toString());
-            //End of Tracking log.
-            System.out.println("====");
         }
 
-        System.out.println("Traverse");
         codeMap = new TreeMap<String, T>();
         keyMap = new TreeMap<T, String>();
         setMaps(getRootNode(), "");
-        System.out.println(keyMap.toString());
-        System.out.println(codeMap.toString());
     }
 
     /**
@@ -86,9 +78,7 @@ public class HuffmanTree<T extends Comparable<? super T>>
             leftTree.setRootNode(right);
             rightTree.setRootNode(left);
         }
-        /* This code is kept */
         setTree(new HuffmanData<T>(MARKER, left.getData().getOccurances() + right.getData().getOccurances()), leftTree, rightTree);
-        //        setTree(new HuffmanData<T>((T) (left.getData().getData().toString() + right.getData().getData().toString()), left.getData().getOccurances() + right.getData().getOccurances()), leftTree, rightTree);
     }
 
     /**
@@ -102,7 +92,6 @@ public class HuffmanTree<T extends Comparable<? super T>>
         BinaryNodeInterface<HuffmanData<T>> currentNode = node;
         String path = codeString;
         if (currentNode.getLeftChild() == null && currentNode.getRightChild() == null) {
-            System.out.println(currentNode.getData().toString() + ":" + path);
             codeMap.put(path, currentNode.getData().getData());
             keyMap.put(currentNode.getData().getData(), path);
         } else {
