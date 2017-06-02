@@ -16,8 +16,8 @@ public class HuffmanTree<T extends Comparable<? super T>>
         extends BinaryTree<HuffmanData<T>> {
 
     private final T MARKER = null;
-    SortedMap<T, String> codeMap;
-    SortedMap<String, T> keyMap;
+    SortedMap<T, String> keyMap;
+    SortedMap<String, T> codeMap;
     private int leafCount = 0;
 
     /**
@@ -59,8 +59,8 @@ public class HuffmanTree<T extends Comparable<? super T>>
             System.out.println("====");
         }
         System.out.println("Traverse");
-        keyMap = new TreeMap<String, T>();
-        codeMap = new TreeMap<T, String>();
+        codeMap = new TreeMap<String, T>();
+        keyMap = new TreeMap<T, String>();
         setMaps(getRootNode(), "");
         System.out.println(keyMap.toString());
         System.out.println(codeMap.toString());
@@ -101,8 +101,8 @@ public class HuffmanTree<T extends Comparable<? super T>>
         String path = codeString;
         if (currentNode.getLeftChild() == null && currentNode.getRightChild() == null) {
             System.out.println(currentNode.getData().toString() + ":" + path);
-            keyMap.put(path, currentNode.getData().getData());
-            codeMap.put(currentNode.getData().getData(), path);
+            codeMap.put(path, currentNode.getData().getData());
+            keyMap.put(currentNode.getData().getData(), path);
         } else {
             if (currentNode.getLeftChild() != null) {
                 setMaps(currentNode.getLeftChild(), path.concat("0"));
@@ -117,7 +117,7 @@ public class HuffmanTree<T extends Comparable<? super T>>
      * accessor for codeMap
      * @ return codeMap
      */
-    public SortedMap<T, String> getCodeMap() {
+    public SortedMap<String, T> getCodeMap() {
         return codeMap;
     }
 
@@ -125,7 +125,7 @@ public class HuffmanTree<T extends Comparable<? super T>>
      * accessor for keyMap
      * @ return keyMap
      */
-    public SortedMap<String, T> getKeyMap() {
+    public SortedMap<T, String> getKeyMap() {
         return keyMap;
     }
 }

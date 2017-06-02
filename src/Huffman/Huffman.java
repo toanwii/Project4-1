@@ -17,11 +17,17 @@ import java.util.SortedMap;
  */
 public class Huffman {
 
-    static final int CHARMAX = 128;
-
+    public static final int CHARMAX = 128;
+    public static final byte CHARBITS = 7;
+    public static final short CHARBITMAX = 128;
+    
     private static int[] count = new int[128];
     private static HuffmanData[] nodes;
     private byte[] byteArray = null;
+    private HuffmanTree<Character> theTree;
+    private SortedMap<Character, String> keyMap;
+    private SortedMap<String, Character> codeMap;
+    HuffmanChar[] charCountArray;
 
     /**
      * @param args the command line arguments
@@ -110,22 +116,23 @@ public class Huffman {
             System.out.println(nodes[i]);
         }
         System.out.println("===");
-        HuffmanTree a = new HuffmanTree(nodes);
-
+        theTree = new HuffmanTree(nodes);
+        codeMap = theTree.getCodeMap();
+        keyMap = theTree.getKeyMap();
+        
         String tmp;
         ArrayList<String> encodeLine = new ArrayList<>();
-        SortedMap<Character, String> map = a.getCodeMap();
         for (String line : story) {
             tmp = "";
             for (int i = 0; i < line.length(); i++) {
-                tmp += map.get(line.charAt(i));
+                tmp += keyMap.get(line.charAt(i));
             }
             System.out.println(tmp);
             System.out.println(line);
 
         }
 
-        System.out.println(a);
+        System.out.println(theTree);
         writeEncodedFile(byteArray, fileName);
         writeKeyFile(fileName);
     }
