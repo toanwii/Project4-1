@@ -59,15 +59,10 @@ public class HuffmanTree<T extends Comparable<? super T>>
             //End of Tracking log.
             System.out.println("====");
         }
-<<<<<<< HEAD
-        System.out.println("Path");
-        keyMap = new TreeMap<String, T>();
-        codeMap = new TreeMap<T, String>();
-=======
+
         System.out.println("Traverse");
         codeMap = new TreeMap<String, T>();
         keyMap = new TreeMap<T, String>();
->>>>>>> commit-encode
         setMaps(getRootNode(), "");
         System.out.println(keyMap.toString());
         System.out.println(codeMap.toString());
