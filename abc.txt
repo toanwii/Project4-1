@@ -1,9 +1,0 @@
-abcabd
-
-12345
-<<<<<<< HEAD
-abc123
-=======
-
-abc123
->>>>>>> commit-encode
