@@ -15,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.Collections;
@@ -25,20 +26,22 @@ import java.util.SortedMap;
  * @author tienhuynh
  */
 public class Huffman {
-    
+
     public static final int CHARMAX = 128;
     public static final byte CHARBITS = 7;
     public static final short CHARBITMAX = 128;
     private static final String KEY_FILE_FORMAT = ".cod";
-    private static final String ENCODE_FILE_FORMAT = ".huff";
-    
+    private static final String ENCODE_FILE_FORMAT = ".huf";
+
     private static int[] count = new int[128];
     private static HuffmanChar[] nodes;
     private byte[] byteArray = null;
+    private int charCount = 0;
     private HuffmanTree<Character> theTree;
     private String[] encodeLine;
     private SortedMap<Character, String> keyMap;
     private SortedMap<String, Character> codeMap;
+    ArrayList<String> story;
 
     /**
      * @param args the command line arguments
@@ -84,25 +87,25 @@ public class Huffman {
     public void encode(String fileName) {
         // YOUR CODE HERE
         int[] c = new int[CHARMAX];
-        
-        ArrayList<String> story;
-        
+
         if (TextFileIO.hasFile(fileName)) {
             TextFileIO.readFile(fileName);
             story = TextFileIO.getTextFile();
         } else {
             return;
         }
-        
+
         for (String line : story) {
             for (int i = 0; i < line.length(); i++) {
                 int k = line.charAt(i);
                 if (k > -1 && k < CHARMAX) {
                     c[k] += 1;
                 }
+                charCount++;
             }
+
         }
-        
+
         int index = 0;
         for (int i = 0; i < CHARMAX; i++) {
             if (c[i] > 0) {
@@ -110,7 +113,7 @@ public class Huffman {
                 index++;
             }
         }
-        
+
         nodes = new HuffmanChar[index];
         index = 0;
         for (int i = 0; i < CHARMAX; i++) {
@@ -120,27 +123,38 @@ public class Huffman {
         }
         //Sort the array, not completed.
         Arrays.sort(nodes);
-        
         theTree = new HuffmanTree(nodes);
         codeMap = theTree.getCodeMap();
         keyMap = theTree.getKeyMap();
-        
-        String tmp;
-        encodeLine = new String[story.size()];
+
+        String tmp = "";
+        ArrayList<Byte> encodeLine = new ArrayList<>();
+        byte oneByte = 0b1000000;
         for (int i = 0; i < story.size(); i++) {
-            tmp = "";
             for (int j = 0; j < story.get(i).length(); j++) {
                 tmp += keyMap.get(story.get(i).charAt(j));
+                while (tmp.length() >= 7) {
+                    byte here = 0b0000000;
+                    for (int k = 0; k < 7; k++) {
+                        if (tmp.charAt(k) == '1')
+                            here = (byte) ((oneByte >> k) | here);
+                    }
+                    encodeLine.add(here);
+                    tmp = tmp.substring(7, tmp.length());
+                }
             }
-            encodeLine[i] = tmp;
         }
-        
-        //writeEncodedFile(byteArray, fileName);
+        if (!tmp.isEmpty()) {
+            encodeLine.add((byte) Integer.parseInt(tmp, 2));
+        }
+        byteArray = new byte[encodeLine.size()];
+
+        for (int i = 0; i < byteArray.length; i++) {
+            byteArray[i] = encodeLine.get(i);
+        }
+
+        writeEncodedFile(byteArray, fileName);
         writeKeyFile(fileName);
-        byte[] r = readByteArray(fileName.substring(0, fileName.lastIndexOf(".")) + ".cod");
-        for (int i = 0; i < r.length; i++) {
-            System.out.println(r[i]);
-        }
     }
 
     /*
@@ -148,7 +162,7 @@ public class Huffman {
      * @param inFileName the file to decode
      */
     public void decode(String inFileName) {
-        
+
     }
 
     /**
@@ -165,14 +179,17 @@ public class Huffman {
             try {
                 output = new BufferedOutputStream(new FileOutputStream(newFileName));
                 output.write(bytes);
+                System.out.println("Encode File written.");
             } finally {
                 output.close();
-                System.out.println("Key file written.");
+
             }
         } catch (FileNotFoundException ex) {
             System.out.println("File Not Found.");
         } catch (IOException ex) {
             System.out.println("IO issue.");
+        } catch (Exception e) {
+            System.out.println("Unknown issue");
         }
     }
 
@@ -201,7 +218,7 @@ public class Huffman {
             System.out.println("IO issue.");
         }
     }
-    
+
     public byte[] readByteArray(String fileName) {
         File file = new File(fileName);
         byte[] result = new byte[(int) file.length()];
@@ -232,6 +249,6 @@ public class Huffman {
             System.out.println("IO issue.");
         }
         return result;
-        
+
     }
 }
