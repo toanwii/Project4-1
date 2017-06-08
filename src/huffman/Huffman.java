@@ -36,7 +36,6 @@ public class Huffman {
     private static int[] count = new int[128];
     private static HuffmanChar[] nodes;
     private byte[] byteArray = null;
-    private int charCount = 0;
     private HuffmanTree<Character> theTree;
     private String[] encodeLine;
     private SortedMap<Character, String> keyMap;
@@ -101,7 +100,6 @@ public class Huffman {
                 if (k > -1 && k < CHARMAX) {
                     c[k] += 1;
                 }
-                charCount++;
             }
 
         }
@@ -136,8 +134,9 @@ public class Huffman {
                 while (tmp.length() >= 7) {
                     byte here = 0b0000000;
                     for (int k = 0; k < 7; k++) {
-                        if (tmp.charAt(k) == '1')
+                        if (tmp.charAt(k) == '1') {
                             here = (byte) ((oneByte >> k) | here);
+                        }
                     }
                     encodeLine.add(here);
                     tmp = tmp.substring(7, tmp.length());
@@ -155,6 +154,7 @@ public class Huffman {
 
         writeEncodedFile(byteArray, fileName);
         writeKeyFile(fileName);
+        decode(fileName);
     }
 
     /*
@@ -162,7 +162,20 @@ public class Huffman {
      * @param inFileName the file to decode
      */
     public void decode(String inFileName) {
+        String keyFileName = inFileName.substring(0, inFileName.lastIndexOf("."));
+        keyFileName += KEY_FILE_FORMAT;
 
+        byte[] charCount = readByteArray(keyFileName);
+        nodes = new HuffmanChar[charCount.length / 3];
+        for (int i = 0; i < nodes.length; i++) {
+            byte[] tmp = new byte[3];
+            tmp[0] = charCount[3 * i];
+            tmp[1] = charCount[3 * i + 1];
+            tmp[2] = charCount[3 * i + 2];
+            nodes[i] = new HuffmanChar(tmp);
+            System.out.println(nodes[i].toString());
+        }
+        theTree = new HuffmanTree<>(nodes);
     }
 
     /**
