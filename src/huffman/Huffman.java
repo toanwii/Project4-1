@@ -163,8 +163,9 @@ public class Huffman {
      */
     public void decode(String inFileName) {
         String keyFileName = inFileName.substring(0, inFileName.lastIndexOf("."));
+        String encodeFileName = keyFileName + ENCODE_FILE_FORMAT;
         keyFileName += KEY_FILE_FORMAT;
-
+        
         byte[] charCount = readByteArray(keyFileName);
         nodes = new HuffmanChar[charCount.length / 3];
         for (int i = 0; i < nodes.length; i++) {
