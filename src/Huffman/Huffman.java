@@ -127,28 +127,37 @@ public class Huffman {
 
         String tmp = "";
         ArrayList<Byte> encodeLine = new ArrayList<>();
-        byte oneByte = 0b1000000;
+        final byte oneByte = 0b01000000;
+        byte here = 0b00000000;
         for (int i = 0; i < story.size(); i++) {
             for (int j = 0; j < story.get(i).length(); j++) {
                 tmp += keyMap.get(story.get(i).charAt(j));
-                while (tmp.length() >= 7) {
-                    byte here = 0b0000000;
-                    for (int k = 0; k < 7; k++) {
-                        if (tmp.charAt(k) == '1') {
-                            here = (byte) ((oneByte >> k) | here);
-                        }
+            }
+            while (tmp.length() >= 7) {
+                here = 0b00000000;
+                for (int k = 0; k < 7; k++) {
+                    if (tmp.charAt(k) == '1') {
+                        here = (byte) ((oneByte >> k) | here);
                     }
-                    encodeLine.add(here);
-                    tmp = tmp.substring(7, tmp.length());
                 }
+                encodeLine.add(here);
+                tmp = tmp.substring(7, tmp.length());
             }
         }
+        System.out.println(encodeLine.size());
         if (!tmp.isEmpty()) {
-            encodeLine.add((byte) Integer.parseInt(tmp, 2));
+            here = 0b00000000;
+            for (int k = 0; k < tmp.length(); k++) {
+                if (tmp.charAt(k) == '1') {
+                    here = (byte) ((oneByte >> k) | here);
+                }
+            }
+            encodeLine.add(here);
         }
-        byteArray = new byte[encodeLine.size()];
 
-        for (int i = 0; i < byteArray.length; i++) {
+        byteArray = new byte[encodeLine.size()];
+        
+        for (int i = 0; i < encodeLine.size(); i++) {
             byteArray[i] = encodeLine.get(i);
         }
 
@@ -165,7 +174,7 @@ public class Huffman {
         String keyFileName = inFileName.substring(0, inFileName.lastIndexOf("."));
         String encodeFileName = keyFileName + ENCODE_FILE_FORMAT;
         keyFileName += KEY_FILE_FORMAT;
-        
+
         byte[] charCount = readByteArray(keyFileName);
         nodes = new HuffmanChar[charCount.length / 3];
         for (int i = 0; i < nodes.length; i++) {
@@ -177,6 +186,49 @@ public class Huffman {
             System.out.println(nodes[i].toString());
         }
         theTree = new HuffmanTree<>(nodes);
+        byte[] content = readByteArray(encodeFileName);
+        System.out.println(content.length);
+        String tmp = "";
+        Character a;
+        int marker;
+        String t = "";
+        int i = 0;
+        for (i = 0; i < content.length;) {
+            a = null;
+            marker = 0;
+            BinaryNodeInterface<HuffmanData<Character>> currentNode = theTree.getRootNode();
+
+            while (a == null) {
+                t = Integer.toBinaryString(content[i]);
+
+                while (t.length() < 7) {
+                    t = "0" + t;
+                }
+
+                tmp += t;
+
+                for (int j = marker; j < tmp.length(); j++) {
+                    if (tmp.charAt(j) == '0') {
+                        currentNode = currentNode.getLeftChild();
+                    } else {
+                        currentNode = currentNode.getRightChild();
+                    }
+                    marker++;
+                    a = currentNode.getData().getData();
+                    if (a != null) {
+                        break;
+                    }
+                }
+                i++;
+            }
+            tmp = tmp.substring(marker, tmp.length());
+
+            if (a == '\n') {
+                System.out.println();
+            } else {
+                System.out.print(a);
+            }
+        }
     }
 
     /**
