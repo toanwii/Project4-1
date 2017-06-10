@@ -1,3 +1,9 @@
+# todo list
+method decode in Huffman.java: write out decodeLine arrayList to text file. See requirement for name.
+method encode in Hufman.java: calculate compression rate at very end of encode.
+Javadoc.
+Test plan, sample output.
+
 # Project4
 CS 143 Huffman coding
 Instructions and requirements for the project
