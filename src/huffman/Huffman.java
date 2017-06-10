@@ -172,7 +172,6 @@ public class Huffman {
             tmp[1] = charCount[3 * i + 1];
             tmp[2] = charCount[3 * i + 2];
             nodes[i] = new HuffmanChar(tmp);
-            System.out.println(nodes[i].toString());
         }
         theTree = new HuffmanTree<>(nodes);
         byte[] content = readByteArray(encodeFileName);
@@ -213,8 +212,6 @@ public class Huffman {
             }
             i++;
         }
-        for(String s : decodeLine)
-            System.out.print(s);
     }
 
     /**
