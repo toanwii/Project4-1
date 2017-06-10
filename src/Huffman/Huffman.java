@@ -144,26 +144,15 @@ public class Huffman {
                 tmp = tmp.substring(7, tmp.length());
             }
         }
-        System.out.println(encodeLine.size());
-        if (!tmp.isEmpty()) {
-            here = 0b00000000;
-            for (int k = 0; k < tmp.length(); k++) {
-                if (tmp.charAt(k) == '1') {
-                    here = (byte) ((oneByte >> k) | here);
-                }
-            }
-            encodeLine.add(here);
-        }
 
         byteArray = new byte[encodeLine.size()];
-        
+
         for (int i = 0; i < encodeLine.size(); i++) {
             byteArray[i] = encodeLine.get(i);
         }
 
         writeEncodedFile(byteArray, fileName);
         writeKeyFile(fileName);
-        decode(fileName);
     }
 
     /*
@@ -187,48 +176,45 @@ public class Huffman {
         }
         theTree = new HuffmanTree<>(nodes);
         byte[] content = readByteArray(encodeFileName);
-        System.out.println(content.length);
+        
         String tmp = "";
+        String line = "";
         Character a;
-        int marker;
         String t = "";
-        int i = 0;
-        for (i = 0; i < content.length;) {
-            a = null;
-            marker = 0;
-            BinaryNodeInterface<HuffmanData<Character>> currentNode = theTree.getRootNode();
+        
+        BinaryNodeInterface<HuffmanData<Character>> currentNode = theTree.getRootNode();
+        ArrayList<String> decodeLine = new ArrayList<>();
+        for (int i = 0; i < content.length;) {
+            t = Integer.toBinaryString(content[i]);
 
-            while (a == null) {
-                t = Integer.toBinaryString(content[i]);
+            while (t.length() < 7) {
+                t = "0" + t;
+            }
 
-                while (t.length() < 7) {
-                    t = "0" + t;
+            tmp += t;
+            while (!tmp.isEmpty()) {
+                if (tmp.charAt(0) == '0') {
+                    currentNode = currentNode.getLeftChild();
+                } else {
+                    currentNode = currentNode.getRightChild();
                 }
 
-                tmp += t;
-
-                for (int j = marker; j < tmp.length(); j++) {
-                    if (tmp.charAt(j) == '0') {
-                        currentNode = currentNode.getLeftChild();
+                a = currentNode.getData().getData();
+                tmp = tmp.substring(1, tmp.length());
+                if (a != null) {
+                    if (a == '\n') {
+                        decodeLine.add(line + '\n');
+                        line = "";
                     } else {
-                        currentNode = currentNode.getRightChild();
+                        line += a;
                     }
-                    marker++;
-                    a = currentNode.getData().getData();
-                    if (a != null) {
-                        break;
-                    }
+                    currentNode = theTree.getRootNode();
                 }
-                i++;
             }
-            tmp = tmp.substring(marker, tmp.length());
-
-            if (a == '\n') {
-                System.out.println();
-            } else {
-                System.out.print(a);
-            }
+            i++;
         }
+        for(String s : decodeLine)
+            System.out.print(s);
     }
 
     /**
