@@ -1,5 +1,5 @@
 # todo list
-- [ ]method decode in Huffman.java: write out decodeLine arrayList to text file. See requirement for name.
+- [Micheal]method decode in Huffman.java: write out decodeLine arrayList to text file. See requirement for name.
 
 - [ ]method encode in Hufman.java: calculate compression rate at very end of encode.
 
