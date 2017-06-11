@@ -215,7 +215,6 @@ public class Huffman {
                 if (a != null) {
                     if (a == '\n') {
                         decodeLine.add(line + '\n');
-                        System.out.println(line);
                         line = "";
                     } else {
                         line += a;
