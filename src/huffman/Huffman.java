@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectOutputStream;
@@ -20,6 +21,8 @@ import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.SortedMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -145,6 +148,15 @@ public class Huffman {
             }
         }
 
+        if (!tmp.isEmpty()) {
+            here = 0b00000000;
+            for (int k = 0; k < tmp.length(); k++) {
+                if (tmp.charAt(k) == '1') {
+                    here = (byte) ((oneByte >> k) | here);
+                }
+            }
+            encodeLine.add(here);
+        }
         byteArray = new byte[encodeLine.size()];
 
         for (int i = 0; i < encodeLine.size(); i++) {
@@ -175,12 +187,12 @@ public class Huffman {
         }
         theTree = new HuffmanTree<>(nodes);
         byte[] content = readByteArray(encodeFileName);
-        
+
         String tmp = "";
         String line = "";
         Character a;
         String t = "";
-        
+
         BinaryNodeInterface<HuffmanData<Character>> currentNode = theTree.getRootNode();
         ArrayList<String> decodeLine = new ArrayList<>();
         for (int i = 0; i < content.length;) {
@@ -203,6 +215,7 @@ public class Huffman {
                 if (a != null) {
                     if (a == '\n') {
                         decodeLine.add(line + '\n');
+                        System.out.println(line);
                         line = "";
                     } else {
                         line += a;
@@ -212,6 +225,13 @@ public class Huffman {
             }
             i++;
         }
+        
+        if (!line.isEmpty())
+            decodeLine.add(line);
+        
+        String newFileName = inFileName.substring(0, inFileName.
+                lastIndexOf(".")) + "_x.txt";
+        write2TextFile(decodeLine, newFileName);
     }
 
     /**
@@ -290,7 +310,11 @@ public class Huffman {
          the while loop usually has a single iteration only.
                  */
             } finally {
-                input.close();
+                try {
+                    input.close();
+                } catch (NullPointerException e) {
+                    System.out.println("No file was opened.");
+                }
             }
         } catch (FileNotFoundException ex) {
             System.out.println("File Not Found");
@@ -298,6 +322,25 @@ public class Huffman {
             System.out.println("IO issue.");
         }
         return result;
+    }
 
+    private void write2TextFile(ArrayList<String> lines, String fileName) {
+        FileWriter fout = null;
+        try {
+            fout = new FileWriter(fileName);
+            for (String s : lines) {
+                fout.write(s);
+            }
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            try {
+                if (fout != null) {
+                    fout.close();
+                }
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }
 }
