@@ -65,9 +65,9 @@ public class Huffman {
         //----------------------------------------------------
         // used for debugging encoding
         //----------------------------------------------------
-        args = new String[2];
-        args[0] = "-d";
-        args[1] = "AlmostAllCharacterTest.txt";  
+        //args = new String[2];
+        //args[0] = "-d";
+        //args[1] = "AlmostAllCharacterTest.txt";  
         //----------------------------------------------------        
         boolean decode = false;
         String textFileName = "";
