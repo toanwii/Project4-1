@@ -1,11 +1,13 @@
 # todo list
 - [Micheal]method decode in Huffman.java: write out decodeLine arrayList to text file. See requirement for name.
 
-- [ ]method encode in Hufman.java: calculate compression rate at very end of encode.
+- [x]method encode in Hufman.java: calculate compression rate at very end of encode.
 
-- [ ]Javadoc.
+- [x]Javadoc.
 
-- [ ]Test plan, sample output.
+- [x]Test plan, sample output.
+
+- [ ] Group evaluation.
 
 # Project4
 CS 143 Huffman coding
