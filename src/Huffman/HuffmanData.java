@@ -5,9 +5,6 @@
  */
 package huffman;
 
-import java.lang.*;
-import java.util.Comparator;
-
 /**
  * HuffmanData.
  * @author pbladek
