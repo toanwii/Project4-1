@@ -36,7 +36,7 @@ public class BinaryTree<T> implements BinaryTreeInterface<T> ,
      * constructor
      * @param rootData data for root node
      * @param leftTree left subtree to attach
-     * @param leftTree right subtree to attach
+     * @param rightTree right subtree to attach
      */
     public BinaryTree (T rootData, BinaryTree<T> leftTree,
             BinaryTree<T> rightTree)

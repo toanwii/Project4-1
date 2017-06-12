@@ -7,7 +7,7 @@ package huffman;
 /**
  * Holds a data of type T, and its number of occurrences.
  * 
- * @param <T>
+ * @param <T> data type T.
  * 
  * 
  * @author Paul Bladek

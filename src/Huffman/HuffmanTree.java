@@ -13,13 +13,13 @@ import java.util.*;
  * @author Michael Courter
  * @author Paul Bladek
  * @version 1.0
+ * @param <T> data Type T
  *
  * Compiler: Java 1.8.0_111 OS: Windows 10 Hardware: PC HISTORY LOG<br>
- * Delete first, add(Huffmanata element).<br>
+ * Delete first, add(HuffmanData element).<br>
  * Implement code for add(BinaryNode left, BinaryNode right)<br>
  * Write up the constructor.<br>
- * Test and run to ensure the tree is correctly constructed. >>>>>>>
- * Michael1Work
+ * Test and run to ensure the tree is correctly constructed.
  */
 public class HuffmanTree<T extends Comparable<? super T>>
         extends BinaryTree<HuffmanData<T>>

@@ -1,7 +1,6 @@
 /**
  * Huffman.java
  */
-
 package huffman;
 
 import java.util.ArrayList;
@@ -17,21 +16,21 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.SortedMap;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
- * Compresses the passed text file into a binary file if the only argument is
- * a text file otherwise if the first argument is "-d", then the compressed 
+ * Compresses the passed text file into a binary file if the only argument is a
+ * text file otherwise if the first argument is "-d", then the compressed
  * version of the file is uncompressed and "x" is added to the end of the name.
- * 
+ *
  * @author tienhuynh
  * @author Michael Courter
  * @author Branavan Nagendiram, Jason Bowen
  * @author Paul Bladeck
  * @version 1.1
- * 
- * Compiler: Java 1.8.0_111
- * OS: Windows 10
- * Hardware: PC
+ *
+ * Compiler: Java 1.8.0_111 OS: Windows 10 Hardware: PC
  */
 public class Huffman {
 
@@ -51,9 +50,9 @@ public class Huffman {
     ArrayList<String> story;
 
     /**
-     * Main method of program. Starts the code and decode processes depending
-     * on the passed argument.
-     * 
+     * Main method of program. Starts the code and decode processes depending on
+     * the passed argument.
+     *
      * @param args the command line arguments
      */
     public static void main(String[] args) {
@@ -72,6 +71,18 @@ public class Huffman {
         //----------------------------------------------------        
         boolean decode = false;
         String textFileName = "";
+        if (args.length == 0) {
+            JOptionPane.showMessageDialog(null, "File Cannot Be Read Or Doesn't "
+                    + "Exist. Please Click OK and Select the File You Wish to "
+                    + "Open.");
+            JFileChooser chooseFile = new JFileChooser();
+            int value = chooseFile.showOpenDialog(null);
+            if (value == JFileChooser.APPROVE_OPTION) {
+                File readFile;
+                readFile = chooseFile.getSelectedFile();
+                textFileName = readFile.getName();
+            }
+        }
         if (args.length > 0) {
             if (args[0].substring(0, 2).toLowerCase().equals("-d")) {
                 decode = true;
@@ -92,7 +103,7 @@ public class Huffman {
 
     /**
      * Encodes the file with the passed name as a .huf binary file.
-     * 
+     *
      * @param fileName the file to encode
      */
     public void encode(String fileName) {
@@ -133,7 +144,7 @@ public class Huffman {
                 nodes[index++] = new HuffmanChar((char) i, count[i]);
             }
         }
-        
+
         //Sort the array, not completed.
         Arrays.sort(nodes);
         theTree = new HuffmanTree(nodes);
@@ -177,22 +188,22 @@ public class Huffman {
 
         writeEncodedFile(byteArray, fileName);
         writeKeyFile(fileName);
-        
+
         long finSize = getFileSize(fileName);
-        String newFileName = fileName.substring(0,fileName.lastIndexOf("."))+ENCODE_FILE_FORMAT;
+        String newFileName = fileName.substring(0, fileName.lastIndexOf(".")) + ENCODE_FILE_FORMAT;
         long foutSize = getFileSize(newFileName);
-        System.out.printf(newFileName + ": %.2f%% compression%n",finSize*100.0/foutSize);
+        System.out.printf(newFileName + ": %.2f%% compression%n", finSize * 100.0 / foutSize);
     }
 
     /**
-     * Decodes the .huf file back to a text file with "x" added to the end of 
+     * Decodes the .huf file back to a text file with "x" added to the end of
      * the file name.
-     * 
+     *
      * @param inFileName the file to decode
      */
     public void decode(String inFileName) {
-        String keyFileName = 
-                inFileName.substring(0, inFileName.lastIndexOf("."));
+        String keyFileName
+                = inFileName.substring(0, inFileName.lastIndexOf("."));
         String encodeFileName = keyFileName + ENCODE_FILE_FORMAT;
         keyFileName += KEY_FILE_FORMAT;
 
@@ -213,8 +224,8 @@ public class Huffman {
         Character a;
         String t = "";
 
-        BinaryNodeInterface<HuffmanData<Character>> currentNode = 
-                theTree.getRootNode();
+        BinaryNodeInterface<HuffmanData<Character>> currentNode
+                = theTree.getRootNode();
         ArrayList<String> decodeLine = new ArrayList<>();
         for (int i = 0; i < content.length;) {
             t = Integer.toBinaryString(content[i]);
@@ -312,8 +323,8 @@ public class Huffman {
     }
 
     /**
-     *  Reads the byte array from the passed file, and returns it.
-     * 
+     * Reads the byte array from the passed file, and returns it.
+     *
      * @param fileName of the file that contains the byte array
      * @return the byte array from the file
      */
@@ -328,8 +339,8 @@ public class Huffman {
                 while (totalBytesRead < result.length) {
                     int bytesRemaining = result.length - totalBytesRead;
                     //input.read() returns -1, 0, or more :
-                    int bytesRead = 
-                            input.read(result, totalBytesRead, bytesRemaining);
+                    int bytesRead
+                            = input.read(result, totalBytesRead, bytesRemaining);
                     if (bytesRead > 0) {
                         totalBytesRead = totalBytesRead + bytesRead;
                     }
@@ -355,11 +366,10 @@ public class Huffman {
     }
 
     /**
-     * Writes the passed list of Strings to the file with the passed file 
-     * name.
-     * 
+     * Writes the passed list of Strings to the file with the passed file name.
+     *
      * @param lines
-     * @param fileName 
+     * @param fileName
      */
     private void writeToTextFile(ArrayList<String> lines, String fileName) {
         FileWriter fout = null;
@@ -384,6 +394,7 @@ public class Huffman {
 
     /**
      * Get file size of a file.
+     *
      * @param filename File name
      * @return Size in long.
      */
@@ -396,4 +407,3 @@ public class Huffman {
         return file.length();
     }
 }
-
