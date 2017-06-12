@@ -345,6 +345,7 @@ public class Huffman {
             for (String s : lines) {
                 fout.write(s);
             }
+            System.out.println("New text file created: " + fileName);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         } finally {

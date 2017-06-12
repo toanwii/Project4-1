@@ -12,8 +12,8 @@ import java.util.*;
  * binary tree for Huffman coding
  *
  * @author pbladek
- * @author tienhuynh, Michael Courter, Branavan Nagendiram, Jason Bowen
- * Junhong Teng<br>
+ * @author tienhuynh, Michael Courter, Branavan Nagendiram, Jason Bowen Junhong
+ * Teng<br>
  * HISTORY LOG<br>
  * Delete first, add(Huffmanata element).<br>
  * Implement code for add(BinaryNode left, BinaryNode right)<br>
@@ -42,28 +42,35 @@ public class HuffmanTree<T extends Comparable<? super T>>
      * @param dataArray n array of Huffman Data
      */
     public HuffmanTree(HuffmanData<T>[] dataArray) {
-
-        BinaryNode<HuffmanData<T>>[] nodes;
-        BinaryNode<HuffmanData<T>> tmp;
-        nodes = new BinaryNode[dataArray.length];
-        for (int i = 0; i < dataArray.length; i++) {
-            nodes[i] = new BinaryNode<>(dataArray[i], null, null);
+        if (dataArray.length < 1) {
+            return;
         }
-        while (leafCount < nodes.length - 1) {
-            add(nodes[leafCount], nodes[++leafCount]);
-            nodes[leafCount] = (BinaryNode<HuffmanData<T>>) super.getRootNode();
-            for (int i = leafCount + 1; i < nodes.length - 1; i++) {
-                if (getRootData().getOccurances() <= nodes[i].getData().getOccurances()) {
-                    nodes[i - 1] = (BinaryNode<HuffmanData<T>>) getRootNode();
-                    break;
-                } else {
-                    tmp = nodes[i - 1];
-                    nodes[i - 1] = nodes[i];
-                    nodes[i] = tmp;
+        if (dataArray.length == 1) {
+            BinaryNode<HuffmanData<T>> left = new BinaryNode<>(dataArray[0], null, null);
+            BinaryNode<HuffmanData<T>> right = new BinaryNode<>(new HuffmanData<>(MARKER));
+            add(left, right);
+        } else {
+            BinaryNode<HuffmanData<T>>[] nodes;
+            BinaryNode<HuffmanData<T>> tmp;
+            nodes = new BinaryNode[dataArray.length];
+            for (int i = 0; i < dataArray.length; i++) {
+                nodes[i] = new BinaryNode<>(dataArray[i], null, null);
+            }
+            while (leafCount < nodes.length - 1) {
+                add(nodes[leafCount], nodes[++leafCount]);
+                nodes[leafCount] = (BinaryNode<HuffmanData<T>>) super.getRootNode();
+                for (int i = leafCount + 1; i < nodes.length - 1; i++) {
+                    if (getRootData().getOccurances() <= nodes[i].getData().getOccurances()) {
+                        nodes[i - 1] = (BinaryNode<HuffmanData<T>>) getRootNode();
+                        break;
+                    } else {
+                        tmp = nodes[i - 1];
+                        nodes[i - 1] = nodes[i];
+                        nodes[i] = tmp;
+                    }
                 }
             }
         }
-
         codeMap = new TreeMap<String, T>();
         keyMap = new TreeMap<T, String>();
         setMaps(getRootNode(), "");
