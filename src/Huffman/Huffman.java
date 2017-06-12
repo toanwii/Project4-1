@@ -61,13 +61,13 @@ public class Huffman {
         // used for debugging encoding
         //----------------------------------------------------
         //args = new String[1];
-        //args[0] = "Alice_In_Wonderland.txt";
+        //args[0] = "AlmostAllCharacterTest.txt";
         //----------------------------------------------------
         // used for debugging encoding
         //----------------------------------------------------
-        //args = new String[2];
-        //args[0] = "-d";
-        //args[1] = "Alice_In_Wonderland.txt";  
+        args = new String[2];
+        args[0] = "-d";
+        args[1] = "AlmostAllCharacterTest.txt";  
         //----------------------------------------------------        
         boolean decode = false;
         String textFileName = "";
