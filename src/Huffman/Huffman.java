@@ -6,7 +6,6 @@
 package huffman;
 
 import java.util.ArrayList;
-import huffman.*;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -16,13 +15,9 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.SortedMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -165,6 +160,11 @@ public class Huffman {
 
         writeEncodedFile(byteArray, fileName);
         writeKeyFile(fileName);
+        
+        long finSize = getFileSize(fileName);
+        String newFileName = fileName.substring(0,fileName.lastIndexOf("."))+ENCODE_FILE_FORMAT;
+        long foutSize = getFileSize(newFileName);
+        System.out.printf(newFileName + ": %.2f%% compression%n",finSize*100.0/foutSize);
     }
 
     /*
@@ -224,10 +224,11 @@ public class Huffman {
             }
             i++;
         }
-        
-        if (!line.isEmpty())
+
+        if (!line.isEmpty()) {
             decodeLine.add(line);
-        
+        }
+
         String newFileName = inFileName.substring(0, inFileName.
                 lastIndexOf(".")) + "_x.txt";
         write2TextFile(decodeLine, newFileName);
@@ -341,5 +342,18 @@ public class Huffman {
                 System.out.println(ex.getMessage());
             }
         }
+    }
+    /**
+     * 
+     * @param filename
+     * @return 
+     */
+    public static long getFileSize(String filename) {
+        File file = new File(filename);
+        if (!file.exists() || !file.isFile()) {
+            System.out.println("File doesn\'t exist");
+            return -1;
+        }
+        return file.length();
     }
 }
