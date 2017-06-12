@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/* Huffman.java */
+
 package huffman;
 
 import java.util.ArrayList;
-import huffman.*;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -16,17 +12,24 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.SortedMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
- *
+ * 
+ * 
+ * Compresses the passed text file into a binary file if the only argument is
+ * a text file otherwise if the first argument is "-d", then the compressed 
+ * version of the file is uncompressed and "x" is added to the end of the name.
+ * 
  * @author tienhuynh
+ * @author Michael Courter
+ * @version 1.0
+ * 
+ * Compiler: Java 1.8.0_111
+ * OS: Windows 10
+ * Hardware: PC
  */
 public class Huffman {
 
@@ -46,22 +49,25 @@ public class Huffman {
     ArrayList<String> story;
 
     /**
+     * Main method of program. Starts the code and decode processes depending
+     * on the passed argument.
+     * 
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-//----------------------------------------------------
-// used for debugging encoding
-//----------------------------------------------------
-//        args = new String[1];
-//        args[0] = "alice.txt";
-//----------------------------------------------------
-// used for debugging encoding
-//----------------------------------------------------
-//        args = new String[2];
-//        args[0] = "-d";
-//        args[1] = "alice.txt";  
-//----------------------------------------------------        
+        //----------------------------------------------------
+        // used for debugging encoding
+        //----------------------------------------------------
+        //args = new String[1];
+        //args[0] = "Alice_In_Wonderland.txt";
+        //----------------------------------------------------
+        // used for debugging encoding
+        //----------------------------------------------------
+        //args = new String[2];
+        //args[0] = "-d";
+        //args[1] = "Alice_In_Wonderland.txt";  
+        //----------------------------------------------------        
         boolean decode = false;
         String textFileName = "";
         if (args.length > 0) {
@@ -82,14 +88,15 @@ public class Huffman {
         }
     }
 
-    /*
-     * encode
+    /**
+     * Encodes the file with the passed name as a .huf binary file.
+     * 
      * @param fileName the file to encode
      */
     public void encode(String fileName) {
-        // YOUR CODE HERE
         int[] c = new int[CHARMAX];
 
+        // Turn the text file into an array of Strings
         if (TextFileIO.hasFile(fileName)) {
             TextFileIO.readFile(fileName);
             story = TextFileIO.getTextFile();
@@ -97,6 +104,7 @@ public class Huffman {
             return;
         }
 
+        // Find the frequency of the characters in the text file
         for (String line : story) {
             for (int i = 0; i < line.length(); i++) {
                 int k = line.charAt(i);
@@ -104,9 +112,9 @@ public class Huffman {
                     c[k] += 1;
                 }
             }
-
         }
 
+        // Creates a copy of c as a static array called count
         int index = 0;
         for (int i = 0; i < CHARMAX; i++) {
             if (c[i] > 0) {
@@ -115,6 +123,7 @@ public class Huffman {
             }
         }
 
+        // Creates an array holding nodes that hold the chars and frequencies
         nodes = new HuffmanChar[index];
         index = 0;
         for (int i = 0; i < CHARMAX; i++) {
@@ -122,6 +131,7 @@ public class Huffman {
                 nodes[index++] = new HuffmanChar((char) i, count[i]);
             }
         }
+        
         //Sort the array, not completed.
         Arrays.sort(nodes);
         theTree = new HuffmanTree(nodes);
@@ -167,8 +177,10 @@ public class Huffman {
         writeKeyFile(fileName);
     }
 
-    /*
-     * decode
+    /**
+     * Decodes the .huf file back to a text file with "x" added to the end of 
+     * the file name.
+     * 
      * @param inFileName the file to decode
      */
     public void decode(String inFileName) {
@@ -230,14 +242,14 @@ public class Huffman {
         
         String newFileName = inFileName.substring(0, inFileName.
                 lastIndexOf(".")) + "_x.txt";
-        write2TextFile(decodeLine, newFileName);
+        writeToTextFile(decodeLine, newFileName);
     }
 
     /**
-     * writeEncodedFile
+     * Creates the .huf file.
      *
-     * @param bytes bytes for file
-     * @param fileName file input
+     * @param bytes for the file
+     * @param fileName the name and extension of the file
      */
     public void writeEncodedFile(byte[] bytes, String fileName) {
         String newFileName = fileName.substring(0, fileName.lastIndexOf("."));
@@ -262,9 +274,9 @@ public class Huffman {
     }
 
     /**
-     * writeKeyFile
+     * Creates the .cod.
      *
-     * @param fileName the name of the file to write to
+     * @param fileName of the file to write to
      */
     public void writeKeyFile(String fileName) {
         String newFileName = fileName.substring(0, fileName.lastIndexOf("."));
@@ -287,6 +299,13 @@ public class Huffman {
         }
     }
 
+    /**
+     *  Reads the byte array from the passed file, and returns it.
+     * 
+     * @param fileName of the file that contains the byte array
+     * 
+     * @return the byte array from the file
+     */
     public byte[] readByteArray(String fileName) {
         File file = new File(fileName);
         byte[] result = new byte[(int) file.length()];
@@ -323,7 +342,14 @@ public class Huffman {
         return result;
     }
 
-    private void write2TextFile(ArrayList<String> lines, String fileName) {
+    /**
+     * Writes the passed list of Strings to the file with the passed file 
+     * name.
+     * 
+     * @param lines
+     * @param fileName 
+     */
+    private void writeToTextFile(ArrayList<String> lines, String fileName) {
         FileWriter fout = null;
         try {
             fout = new FileWriter(fileName);
