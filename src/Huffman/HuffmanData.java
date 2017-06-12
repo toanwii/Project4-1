@@ -1,14 +1,28 @@
 /*
  * HuffmanData.java
- *
- * Created on May 21, 2007, 2:17 PM
  */
-package huffman;
 
+<<<<<<< HEAD
 /**
  * HuffmanData.
  * @author pbladek
  * @param <T> Type that implemented Compareable interface.
+=======
+package huffman;
+
+/**
+ * Holds a data of type T, and its number of occurrences.
+ * 
+ * @param <T>
+ * 
+ * 
+ * @author Paul Bladek
+ * @version 1.0
+ * 
+ * Compiler: Java 1.8.0_111
+ * OS: Windows 10
+ * Hardware: PC
+>>>>>>> Michael1Work
  */
 public class HuffmanData<T extends Comparable<? super T>>
         implements Comparable<HuffmanData<T>> {
@@ -17,13 +31,13 @@ public class HuffmanData<T extends Comparable<? super T>>
     private int occurances = 0;
 
     /**
-     * Creates a new instance of HuffmanData
+     * Creates a new instance of HuffmanData.
      */
     public HuffmanData() {
     }
 
     /**
-     * Creates a new instance of HuffmanData
+     * Creates a new instance of HuffmanData using the passed data.
      *
      * @param dataIn the data part
      */
@@ -32,34 +46,42 @@ public class HuffmanData<T extends Comparable<? super T>>
     }
 
     /**
-     * Creates a new instance of HuffmanData
+     * Creates a new instance of HuffmanData using the passed data and number
+     * of occurrences.
      *
      * @param dataIn the data part
-     * @param count the number of occurances
+     * @param count the number of occurrences
      */
     public HuffmanData(T dataIn, int count) {
         this(dataIn);
         occurances = count;
     }
 
-    /*
-     * accessor
-     * @return data
+    /**
+     * Returns the data.
+     * 
+     * @return the data
      */
     public T getData() {
         return data;
     }
 
-    /*
-     * accessor
-     * @return occurances
+    /**
+     * Returns the number of occurrences.
+     * 
+     * @return the number of occurrences
      */
     public int getOccurances() {
         return occurances;
     }
 
     /**
+<<<<<<< HEAD
      * Compare occurance between two HuffmanData classes.
+=======
+     * Compare this to another HuffmanData object.
+     * 
+>>>>>>> Michael1Work
      * @param o the other HuffmanData
      * @return -1 if less than, 0 if equals, 1 if greater than.
      */
@@ -68,8 +90,10 @@ public class HuffmanData<T extends Comparable<? super T>>
         return Integer.compare(occurances, o.occurances);
     }
 
-    /*
-     * @return strng version of class
+    /**
+     * Returns a string of the data and its number of occurrences.
+     * 
+     * @return string version of object
      */
     @Override
     public String toString() {
@@ -79,5 +103,4 @@ public class HuffmanData<T extends Comparable<? super T>>
         }
         return dataString + ": " + occurances + " ";
     }
-
 }

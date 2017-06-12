@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 /**
  * Huffman.java
+=======
+/* 
+ * Huffman.java 
+>>>>>>> Michael1Work
  */
+
 package huffman;
 
 import java.util.ArrayList;
@@ -18,6 +24,7 @@ import java.util.Arrays;
 import java.util.SortedMap;
 
 /**
+<<<<<<< HEAD
  * Class: Huffman.java<br>
  * Main class, will read in the file name the user inputs and if they wish
  * to encode, or decode the file.<br>
@@ -26,6 +33,20 @@ import java.util.SortedMap;
  * @version 1.0
  * @author tienhuynh, Michael Courter, Branavan Nagendiram, Jason Bowen
  * Junhong Teng<br>
+=======
+ * Compresses the passed text file into a binary file if the only argument is
+ * a text file otherwise if the first argument is "-d", then the compressed 
+ * version of the file is uncompressed and "x" is added to the end of the name.
+ * 
+ * @author tienhuynh
+ * @author Michael Courter
+ * @author Paul Bladeck
+ * @version 1.1
+ * 
+ * Compiler: Java 1.8.0_111
+ * OS: Windows 10
+ * Hardware: PC
+>>>>>>> Michael1Work
  */
 public class Huffman {
 
@@ -45,22 +66,25 @@ public class Huffman {
     ArrayList<String> story;
 
     /**
+     * Main method of program. Starts the code and decode processes depending
+     * on the passed argument.
+     * 
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-//----------------------------------------------------
-// used for debugging encoding
-//----------------------------------------------------
-//        args = new String[1];
-//        args[0] = "alice.txt";
-//----------------------------------------------------
-// used for debugging encoding
-//----------------------------------------------------
-//        args = new String[2];
-//        args[0] = "-d";
-//        args[1] = "alice.txt";  
-//----------------------------------------------------        
+        //----------------------------------------------------
+        // used for debugging encoding
+        //----------------------------------------------------
+        //args = new String[1];
+        //args[0] = "AlmostAllCharacterTest.txt";
+        //----------------------------------------------------
+        // used for debugging encoding
+        //----------------------------------------------------
+        //args = new String[2];
+        //args[0] = "-d";
+        //args[1] = "AlmostAllCharacterTest.txt";  
+        //----------------------------------------------------        
         boolean decode = false;
         String textFileName = "";
         if (args.length > 0) {
@@ -81,14 +105,15 @@ public class Huffman {
         }
     }
 
-    /*
-     * encode
+    /**
+     * Encodes the file with the passed name as a .huf binary file.
+     * 
      * @param fileName the file to encode
      */
     public void encode(String fileName) {
-        // YOUR CODE HERE
         int[] c = new int[CHARMAX];
 
+        // Turn the text file into an array of Strings
         if (TextFileIO.hasFile(fileName)) {
             TextFileIO.readFile(fileName);
             story = TextFileIO.getTextFile();
@@ -96,6 +121,7 @@ public class Huffman {
             return;
         }
 
+        // Find the frequency of the characters in the text file
         for (String line : story) {
             for (int i = 0; i < line.length(); i++) {
                 int k = line.charAt(i);
@@ -103,9 +129,9 @@ public class Huffman {
                     c[k] += 1;
                 }
             }
-
         }
 
+        // Creates a copy of c as a static array called count
         int index = 0;
         for (int i = 0; i < CHARMAX; i++) {
             if (c[i] > 0) {
@@ -114,6 +140,7 @@ public class Huffman {
             }
         }
 
+        // Creates an array holding nodes that hold the chars and frequencies
         nodes = new HuffmanChar[index];
         index = 0;
         for (int i = 0; i < CHARMAX; i++) {
@@ -121,6 +148,7 @@ public class Huffman {
                 nodes[index++] = new HuffmanChar((char) i, count[i]);
             }
         }
+        
         //Sort the array, not completed.
         Arrays.sort(nodes);
         theTree = new HuffmanTree(nodes);
@@ -171,12 +199,15 @@ public class Huffman {
         System.out.printf(newFileName + ": %.2f%% compression%n",finSize*100.0/foutSize);
     }
 
-    /*
-     * decode
+    /**
+     * Decodes the .huf file back to a text file with "x" added to the end of 
+     * the file name.
+     * 
      * @param inFileName the file to decode
      */
     public void decode(String inFileName) {
-        String keyFileName = inFileName.substring(0, inFileName.lastIndexOf("."));
+        String keyFileName = 
+                inFileName.substring(0, inFileName.lastIndexOf("."));
         String encodeFileName = keyFileName + ENCODE_FILE_FORMAT;
         keyFileName += KEY_FILE_FORMAT;
 
@@ -197,7 +228,8 @@ public class Huffman {
         Character a;
         String t = "";
 
-        BinaryNodeInterface<HuffmanData<Character>> currentNode = theTree.getRootNode();
+        BinaryNodeInterface<HuffmanData<Character>> currentNode = 
+                theTree.getRootNode();
         ArrayList<String> decodeLine = new ArrayList<>();
         for (int i = 0; i < content.length;) {
             t = Integer.toBinaryString(content[i]);
@@ -235,14 +267,14 @@ public class Huffman {
 
         String newFileName = inFileName.substring(0, inFileName.
                 lastIndexOf(".")) + "_x.txt";
-        write2TextFile(decodeLine, newFileName);
+        writeToTextFile(decodeLine, newFileName);
     }
 
     /**
-     * writeEncodedFile
+     * Creates the .huf file.
      *
-     * @param bytes bytes for file
-     * @param fileName file input
+     * @param bytes for the file
+     * @param fileName the name and extension of the file
      */
     public void writeEncodedFile(byte[] bytes, String fileName) {
         String newFileName = fileName.substring(0, fileName.lastIndexOf("."));
@@ -250,7 +282,8 @@ public class Huffman {
         try {
             OutputStream output = null;
             try {
-                output = new BufferedOutputStream(new FileOutputStream(newFileName));
+                output = new BufferedOutputStream(
+                        new FileOutputStream(newFileName));
                 output.write(bytes);
                 System.out.println("Encode File written.");
             } finally {
@@ -267,9 +300,9 @@ public class Huffman {
     }
 
     /**
-     * writeKeyFile
+     * Creates the .cod.
      *
-     * @param fileName the name of the file to write to
+     * @param fileName of the file to write to
      */
     public void writeKeyFile(String fileName) {
         String newFileName = fileName.substring(0, fileName.lastIndexOf("."));
@@ -277,7 +310,8 @@ public class Huffman {
         try {
             OutputStream output = null;
             try {
-                output = new BufferedOutputStream(new FileOutputStream(newFileName));
+                output = new BufferedOutputStream(
+                        new FileOutputStream(newFileName));
                 for (int i = 0; i < nodes.length; i++) {
                     output.write(nodes[i].toThreeBytes());
                 }
@@ -293,9 +327,17 @@ public class Huffman {
     }
 
     /**
+<<<<<<< HEAD
      * Read byte array from a binary file
      * @param fileName file name.
      * @return A byte array.
+=======
+     *  Reads the byte array from the passed file, and returns it.
+     * 
+     * @param fileName of the file that contains the byte array
+     * 
+     * @return the byte array from the file
+>>>>>>> Michael1Work
      */
     public byte[] readByteArray(String fileName) {
         File file = new File(fileName);
@@ -308,15 +350,16 @@ public class Huffman {
                 while (totalBytesRead < result.length) {
                     int bytesRemaining = result.length - totalBytesRead;
                     //input.read() returns -1, 0, or more :
-                    int bytesRead = input.read(result, totalBytesRead, bytesRemaining);
+                    int bytesRead = 
+                            input.read(result, totalBytesRead, bytesRemaining);
                     if (bytesRead > 0) {
                         totalBytesRead = totalBytesRead + bytesRead;
                     }
                 }
                 /*
-         the above style is a bit tricky: it places bytes into the 'result' array; 
-         'result' is an output parameter;
-         the while loop usually has a single iteration only.
+                 The above style is a bit tricky: it places bytes into the 
+                 'result' array; 'result' is an output parameter; the while 
+                 loop usually has a single iteration only.
                  */
             } finally {
                 try {
@@ -334,11 +377,21 @@ public class Huffman {
     }
 
     /**
+<<<<<<< HEAD
      * Write an arrayList to a text file
      * @param lines An array list of string
      * @param fileName File name.
      */
     private void write2TextFile(ArrayList<String> lines, String fileName) {
+=======
+     * Writes the passed list of Strings to the file with the passed file 
+     * name.
+     * 
+     * @param lines
+     * @param fileName 
+     */
+    private void writeToTextFile(ArrayList<String> lines, String fileName) {
+>>>>>>> Michael1Work
         FileWriter fout = null;
         try {
             fout = new FileWriter(fileName);
@@ -358,6 +411,7 @@ public class Huffman {
             }
         }
     }
+<<<<<<< HEAD
     /**
      * Get file size of a file.
      * @param filename File name
@@ -372,3 +426,6 @@ public class Huffman {
         return file.length();
     }
 }
+=======
+}
+>>>>>>> Michael1Work
