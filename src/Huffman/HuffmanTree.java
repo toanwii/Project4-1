@@ -42,7 +42,8 @@ public class HuffmanTree<T extends Comparable<? super T>>
      * @param dataArray n array of Huffman Data
      */
     public HuffmanTree(HuffmanData<T>[] dataArray) {
-        if (dataArray.length < 1) {
+        if (dataArray.length == 0 || dataArray == null) {
+            System.out.println("Empty array. Cannot construct a tree.");
             return;
         }
         if (dataArray.length == 1) {
