@@ -1,7 +1,6 @@
 /*
  * HuffmanTree.java
  */
-
 package huffman;
 
 import java.io.Serializable;
@@ -10,25 +9,17 @@ import java.util.*;
 /**
  * A binary tree for Huffman coding.
  *
-<<<<<<< HEAD
- * @author pbladek
- * @author tienhuynh, Michael Courter, Branavan Nagendiram, Jason Bowen Junhong
- * Teng<br>
- * HISTORY LOG<br>
- * Delete first, add(Huffmanata element).<br>
- * Implement code for add(BinaryNode left, BinaryNode right)<br>
- * Write up the constructor.<br>
- * Test and run to ensure the tree is correctly constructed.
-=======
  * @author Tien Huynh
  * @author Michael Courter
  * @author Paul Bladek
  * @version 1.0
- * 
- * Compiler: Java 1.8.0_111
- * OS: Windows 10
- * Hardware: PC
->>>>>>> Michael1Work
+ *
+ * Compiler: Java 1.8.0_111 OS: Windows 10 Hardware: PC HISTORY LOG<br>
+ * Delete first, add(Huffmanata element).<br>
+ * Implement code for add(BinaryNode left, BinaryNode right)<br>
+ * Write up the constructor.<br>
+ * Test and run to ensure the tree is correctly constructed. >>>>>>>
+ * Michael1Work
  */
 public class HuffmanTree<T extends Comparable<? super T>>
         extends BinaryTree<HuffmanData<T>>
@@ -56,7 +47,7 @@ public class HuffmanTree<T extends Comparable<? super T>>
             System.out.println("Empty array. Cannot construct a tree.");
             return;
         }
-<<<<<<< HEAD
+
         if (dataArray.length == 1) {
             BinaryNode<HuffmanData<T>> left = new BinaryNode<>(dataArray[0], null, null);
             BinaryNode<HuffmanData<T>> right = new BinaryNode<>(new HuffmanData<>(MARKER));
@@ -80,26 +71,12 @@ public class HuffmanTree<T extends Comparable<? super T>>
                         nodes[i - 1] = nodes[i];
                         nodes[i] = tmp;
                     }
-=======
-        while (leafCount < nodes.length - 1) {
-            add(nodes[leafCount], nodes[++leafCount]);
-            nodes[leafCount] = (BinaryNode<HuffmanData<T>>) super.getRootNode();
-            for (int i = leafCount + 1; i < nodes.length - 1; i++) {
-                if (getRootData().getOccurances() <= 
-                        nodes[i].getData().getOccurances()) {
-                    nodes[i - 1] = (BinaryNode<HuffmanData<T>>) getRootNode();
-                    break;
-                } else {
-                    tmp = nodes[i - 1];
-                    nodes[i - 1] = nodes[i];
-                    nodes[i] = tmp;
->>>>>>> Michael1Work
                 }
             }
+            codeMap = new TreeMap<String, T>();
+            keyMap = new TreeMap<T, String>();
+            setMaps(getRootNode(), "");
         }
-        codeMap = new TreeMap<String, T>();
-        keyMap = new TreeMap<T, String>();
-        setMaps(getRootNode(), "");
     }
 
     /**
@@ -120,22 +97,22 @@ public class HuffmanTree<T extends Comparable<? super T>>
             leftTree.setRootNode(right);
             rightTree.setRootNode(left);
         }
-        setTree(new HuffmanData<T>(MARKER, left.getData().getOccurances() + 
-                right.getData().getOccurances()), leftTree, rightTree);
+        setTree(new HuffmanData<T>(MARKER, left.getData().getOccurances()
+                + right.getData().getOccurances()), leftTree, rightTree);
     }
 
     /**
      * Sets up the 2 maps needed for decompression.
      *
      * @param node to start at while traversing the tree
-     * @param codeString 
+     * @param codeString
      */
     private void setMaps(BinaryNodeInterface<HuffmanData<T>> node,
             String codeString) {
         BinaryNodeInterface<HuffmanData<T>> currentNode = node;
         String path = codeString;
-        if (currentNode.getLeftChild() == null && 
-                currentNode.getRightChild() == null) {
+        if (currentNode.getLeftChild() == null
+                && currentNode.getRightChild() == null) {
             codeMap.put(path, currentNode.getData().getData());
             keyMap.put(currentNode.getData().getData(), path);
         } else {
@@ -150,7 +127,7 @@ public class HuffmanTree<T extends Comparable<? super T>>
 
     /**
      * Returns the codeMap.
-     * 
+     *
      * @return the codeMap
      */
     public SortedMap<String, T> getCodeMap() {
@@ -159,7 +136,7 @@ public class HuffmanTree<T extends Comparable<? super T>>
 
     /**
      * Returns the keyMap.
-     * 
+     *
      * @return the keyMap
      */
     public SortedMap<T, String> getKeyMap() {

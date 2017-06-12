@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 /**
  * Huffman.java
-=======
-/* 
- * Huffman.java 
->>>>>>> Michael1Work
  */
 
 package huffman;
@@ -24,29 +19,19 @@ import java.util.Arrays;
 import java.util.SortedMap;
 
 /**
-<<<<<<< HEAD
- * Class: Huffman.java<br>
- * Main class, will read in the file name the user inputs and if they wish
- * to encode, or decode the file.<br>
- * Compiler: Java JDK 1.8, Netbeans IDE 8.2<br>
- * Hardware: Intel I7 7500U, Windows 10, 16 GB Ram<br>
- * @version 1.0
- * @author tienhuynh, Michael Courter, Branavan Nagendiram, Jason Bowen
- * Junhong Teng<br>
-=======
  * Compresses the passed text file into a binary file if the only argument is
  * a text file otherwise if the first argument is "-d", then the compressed 
  * version of the file is uncompressed and "x" is added to the end of the name.
  * 
  * @author tienhuynh
  * @author Michael Courter
+ * @author Branavan Nagendiram, Jason Bowen
  * @author Paul Bladeck
  * @version 1.1
  * 
  * Compiler: Java 1.8.0_111
  * OS: Windows 10
  * Hardware: PC
->>>>>>> Michael1Work
  */
 public class Huffman {
 
@@ -327,17 +312,10 @@ public class Huffman {
     }
 
     /**
-<<<<<<< HEAD
-     * Read byte array from a binary file
-     * @param fileName file name.
-     * @return A byte array.
-=======
      *  Reads the byte array from the passed file, and returns it.
      * 
      * @param fileName of the file that contains the byte array
-     * 
      * @return the byte array from the file
->>>>>>> Michael1Work
      */
     public byte[] readByteArray(String fileName) {
         File file = new File(fileName);
@@ -377,13 +355,6 @@ public class Huffman {
     }
 
     /**
-<<<<<<< HEAD
-     * Write an arrayList to a text file
-     * @param lines An array list of string
-     * @param fileName File name.
-     */
-    private void write2TextFile(ArrayList<String> lines, String fileName) {
-=======
      * Writes the passed list of Strings to the file with the passed file 
      * name.
      * 
@@ -391,7 +362,6 @@ public class Huffman {
      * @param fileName 
      */
     private void writeToTextFile(ArrayList<String> lines, String fileName) {
->>>>>>> Michael1Work
         FileWriter fout = null;
         try {
             fout = new FileWriter(fileName);
@@ -411,7 +381,7 @@ public class Huffman {
             }
         }
     }
-<<<<<<< HEAD
+
     /**
      * Get file size of a file.
      * @param filename File name
@@ -426,6 +396,4 @@ public class Huffman {
         return file.length();
     }
 }
-=======
-}
->>>>>>> Michael1Work
+

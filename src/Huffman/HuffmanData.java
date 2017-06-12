@@ -2,12 +2,6 @@
  * HuffmanData.java
  */
 
-<<<<<<< HEAD
-/**
- * HuffmanData.
- * @author pbladek
- * @param <T> Type that implemented Compareable interface.
-=======
 package huffman;
 
 /**
@@ -22,7 +16,6 @@ package huffman;
  * Compiler: Java 1.8.0_111
  * OS: Windows 10
  * Hardware: PC
->>>>>>> Michael1Work
  */
 public class HuffmanData<T extends Comparable<? super T>>
         implements Comparable<HuffmanData<T>> {
@@ -76,12 +69,8 @@ public class HuffmanData<T extends Comparable<? super T>>
     }
 
     /**
-<<<<<<< HEAD
-     * Compare occurance between two HuffmanData classes.
-=======
      * Compare this to another HuffmanData object.
      * 
->>>>>>> Michael1Work
      * @param o the other HuffmanData
      * @return -1 if less than, 0 if equals, 1 if greater than.
      */
