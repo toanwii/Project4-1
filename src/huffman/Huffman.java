@@ -1,7 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Huffman.java
  */
 package huffman;
 
@@ -20,8 +18,14 @@ import java.util.Arrays;
 import java.util.SortedMap;
 
 /**
- *
- * @author tienhuynh
+ * Class: Huffman.java<br>
+ * Main class, will read in the file name the user inputs and if they wish
+ * to encode, or decode the file.<br>
+ * Compiler: Java JDK 1.8, Netbeans IDE 8.2<br>
+ * Hardware: Intel I7 7500U, Windows 10, 16 GB Ram<br>
+ * @version 1.0
+ * @author tienhuynh, Michael Courter, Branavan Nagendiram, Jason Bowen
+ * Junhong Teng<br>
  */
 public class Huffman {
 
@@ -288,6 +292,11 @@ public class Huffman {
         }
     }
 
+    /**
+     * Read byte array from a binary file
+     * @param fileName file name.
+     * @return A byte array.
+     */
     public byte[] readByteArray(String fileName) {
         File file = new File(fileName);
         byte[] result = new byte[(int) file.length()];
@@ -324,6 +333,11 @@ public class Huffman {
         return result;
     }
 
+    /**
+     * Write an arrayList to a text file
+     * @param lines An array list of string
+     * @param fileName File name.
+     */
     private void write2TextFile(ArrayList<String> lines, String fileName) {
         FileWriter fout = null;
         try {
@@ -344,9 +358,9 @@ public class Huffman {
         }
     }
     /**
-     * 
-     * @param filename
-     * @return 
+     * Get file size of a file.
+     * @param filename File name
+     * @return Size in long.
      */
     public static long getFileSize(String filename) {
         File file = new File(filename);

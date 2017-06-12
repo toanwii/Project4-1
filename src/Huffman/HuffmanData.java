@@ -9,8 +9,9 @@ import java.lang.*;
 import java.util.Comparator;
 
 /**
+ * HuffmanData.
  * @author pbladek
- * @param <T>
+ * @param <T> Type that implemented Compareable interface.
  */
 public class HuffmanData<T extends Comparable<? super T>>
         implements Comparable<HuffmanData<T>> {
@@ -61,9 +62,9 @@ public class HuffmanData<T extends Comparable<? super T>>
     }
 
     /**
-     *
+     * Compare occurance between two HuffmanData classes.
      * @param o the other HuffmanData
-     * @return -1 if <, 0 if ==, 1 if >
+     * @return -1 if less than, 0 if equals, 1 if greater than.
      */
     @Override
     public int compareTo(HuffmanData<T> o) {

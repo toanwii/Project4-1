@@ -12,6 +12,13 @@ import java.util.*;
  * binary tree for Huffman coding
  *
  * @author pbladek
+ * @author tienhuynh, Michael Courter, Branavan Nagendiram, Jason Bowen
+ * Junhong Teng<br>
+ * HISTORY LOG<br>
+ * Delete first, add(Huffmanata element).<br>
+ * Implement code for add(BinaryNode left, BinaryNode right)<br>
+ * Write up the constructor.<br>
+ * Test and run to ensure the tree is correctly constructed.
  */
 public class HuffmanTree<T extends Comparable<? super T>>
         extends BinaryTree<HuffmanData<T>>
