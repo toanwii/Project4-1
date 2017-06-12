@@ -4,9 +4,18 @@
 
 package huffman;
 import java.io.*;
+
 /**
- *
- * @author pbladek
+ * 
+ * 
+ * @author Tien Huynh
+ * @author Michael Courter
+ * @author Paul Bladek
+ * @version 1.1
+ * 
+ * Compiler: Java 1.8.0_111
+ * OS: Windows 10
+ * Hardware: PC
  */
 public class HuffmanChar extends HuffmanData<Character>
         implements Serializable
@@ -15,7 +24,7 @@ public class HuffmanChar extends HuffmanData<Character>
     public static final int BYTE_SIZE_NUMBER = 256;
   
     /**
-     * Creates a new instance of HuffmanChar
+     * Creates a new instance of HuffmanChar.
      */
     public HuffmanChar()
     {
@@ -23,7 +32,8 @@ public class HuffmanChar extends HuffmanData<Character>
     }
     
     /**
-     *  Creates a new instance of HuffmanChar
+     * Creates a new instance of HuffmanChar with the passed Character.
+     * 
      * @param c the character
      */
     public HuffmanChar(Character c)
@@ -32,9 +42,11 @@ public class HuffmanChar extends HuffmanData<Character>
     }
 
     /**
-     * Creates a new instance of HuffmanChar
+     * Creates a new instance of HuffmanChar with the passed Character, and
+     * the number of times it occurred.
+     * 
      * @param c the character
-     * @param oc the number of occurances
+     * @param oc the number of occurrences
      */
 
     public HuffmanChar(Character c, int oc)
@@ -42,17 +54,20 @@ public class HuffmanChar extends HuffmanData<Character>
         super(c, oc);
     }
     
-     /**
-      *  Creates a new instance of HuffmanChar
-      * @param hc a HuffmanChar
-      */
+    /**
+     *  Creates a new instance of HuffmanChar using the passed HuffmanChar.
+     * 
+     * @param hc a HuffmanChar
+     */
     public HuffmanChar(HuffmanChar hc)
     {
         super(hc.getData(), hc.getOccurances());
     }
    
     /**
-     *  Creates a new instance of HuffmanChar
+     * Creates a new instance of HuffmanChar, using the bytes in the passed
+     * array.
+     * 
      * @param threeBytes an array of three bytes
      */
     public HuffmanChar(byte[] threeBytes)
@@ -65,7 +80,8 @@ public class HuffmanChar extends HuffmanData<Character>
     }
     
     /**
-     * returns the class converted to a 3-byte array
+     * returns the class converted to a 3-byte array.
+     * 
      * @return the class converted to a 3-byte array
      */
     public byte[] toThreeBytes()
@@ -77,5 +93,4 @@ public class HuffmanChar extends HuffmanData<Character>
         ba[2] = (byte)(oc & (byte)(-1));
         return ba; 
     }
-
 }

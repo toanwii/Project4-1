@@ -1,4 +1,6 @@
-/* Huffman.java */
+/* 
+ * Huffman.java 
+ */
 
 package huffman;
 
@@ -17,15 +19,14 @@ import java.util.Arrays;
 import java.util.SortedMap;
 
 /**
- * 
- * 
  * Compresses the passed text file into a binary file if the only argument is
  * a text file otherwise if the first argument is "-d", then the compressed 
  * version of the file is uncompressed and "x" is added to the end of the name.
  * 
  * @author tienhuynh
  * @author Michael Courter
- * @version 1.0
+ * @author Paul Bladeck
+ * @version 1.1
  * 
  * Compiler: Java 1.8.0_111
  * OS: Windows 10
