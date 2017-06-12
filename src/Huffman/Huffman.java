@@ -72,7 +72,8 @@ public class Huffman {
         boolean decode = false;
         String textFileName = "";
         if (args.length == 0) {
-            JOptionPane.showMessageDialog(null, "File Cannot Be Read Or Doesn't "
+            JOptionPane.showMessageDialog(null, "File Cannot Be Rea"
+                    + "d Or Doesn't "
                     + "Exist. Please Click OK and Select the File You Wish to "
                     + "Open.");
             JFileChooser chooseFile = new JFileChooser();
