@@ -185,7 +185,8 @@ public class Huffman {
      * @param inFileName the file to decode
      */
     public void decode(String inFileName) {
-        String keyFileName = inFileName.substring(0, inFileName.lastIndexOf("."));
+        String keyFileName = 
+                inFileName.substring(0, inFileName.lastIndexOf("."));
         String encodeFileName = keyFileName + ENCODE_FILE_FORMAT;
         keyFileName += KEY_FILE_FORMAT;
 
@@ -206,7 +207,8 @@ public class Huffman {
         Character a;
         String t = "";
 
-        BinaryNodeInterface<HuffmanData<Character>> currentNode = theTree.getRootNode();
+        BinaryNodeInterface<HuffmanData<Character>> currentNode = 
+                theTree.getRootNode();
         ArrayList<String> decodeLine = new ArrayList<>();
         for (int i = 0; i < content.length;) {
             t = Integer.toBinaryString(content[i]);
@@ -258,7 +260,8 @@ public class Huffman {
         try {
             OutputStream output = null;
             try {
-                output = new BufferedOutputStream(new FileOutputStream(newFileName));
+                output = new BufferedOutputStream(
+                        new FileOutputStream(newFileName));
                 output.write(bytes);
                 System.out.println("Encode File written.");
             } finally {
@@ -285,7 +288,8 @@ public class Huffman {
         try {
             OutputStream output = null;
             try {
-                output = new BufferedOutputStream(new FileOutputStream(newFileName));
+                output = new BufferedOutputStream(
+                        new FileOutputStream(newFileName));
                 for (int i = 0; i < nodes.length; i++) {
                     output.write(nodes[i].toThreeBytes());
                 }
@@ -318,15 +322,16 @@ public class Huffman {
                 while (totalBytesRead < result.length) {
                     int bytesRemaining = result.length - totalBytesRead;
                     //input.read() returns -1, 0, or more :
-                    int bytesRead = input.read(result, totalBytesRead, bytesRemaining);
+                    int bytesRead = 
+                            input.read(result, totalBytesRead, bytesRemaining);
                     if (bytesRead > 0) {
                         totalBytesRead = totalBytesRead + bytesRead;
                     }
                 }
                 /*
-         the above style is a bit tricky: it places bytes into the 'result' array; 
-         'result' is an output parameter;
-         the while loop usually has a single iteration only.
+                 The above style is a bit tricky: it places bytes into the 
+                 'result' array; 'result' is an output parameter; the while 
+                 loop usually has a single iteration only.
                  */
             } finally {
                 try {

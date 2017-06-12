@@ -1,15 +1,18 @@
 /*
  * SaveDate.java
- *
- * Created on May 25, 2007, 11:09 AM
  */
 
 package huffman;
 import java.io.*;
 /**
- * class for saving the initial sorted array
- *  of data/occurances
- * @author pbladek
+ * The class for saving the initial sorted array of data/occurrences.
+ * 
+ * @author Paul Bladek
+ * @version 1.0
+ * 
+ * Compiler: Java 1.8.0_111
+ * OS: Windows 10
+ * Hardware: PC
  */
 public class SaveData implements Serializable
 {
@@ -21,9 +24,11 @@ public class SaveData implements Serializable
      */
     public SaveData() {}
     
-    /** Creates a new instance of SaveDate
+    /** 
+     * Creates a new instance of SaveDate.
+     * 
      * @param c the data char
-     * @param o the number of occurances
+     * @param o the number of occurrences
      */
     public SaveData(char c, short o)
     {
@@ -32,8 +37,9 @@ public class SaveData implements Serializable
     }
 
     /**
-     * accessor for data
-     * @return data
+     * Returns the data.
+     * 
+     * @return the data
      */
     public char getData()
     {
@@ -41,14 +47,18 @@ public class SaveData implements Serializable
     }
 
     /**
-     * accessor for occurrances
-     * @return data
+     * Returns the occurrences.
+     * 
+     * @return the occurrences
      */
     public short getOccurrances()
     {
         return occurrances;
     }
+    
     /**
+     * Returns the data and its occurrences.
+     * 
      * @return a string version of this class
      */
     @Override
